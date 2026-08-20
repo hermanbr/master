@@ -1,0 +1,124 @@
+---
+- name: Install Open5GS
+  hosts: open5gs
+  become: true
+
+  tasks:
+    - name: Install prerequisites
+      apt:
+        name:
+          - gnupg
+          - curl
+          - software-properties-common
+        update_cache: true
+
+    - name: Add MongoDB apt key
+      apt_key:
+        url: https://pgp.mongodb.com/server-7.0.asc
+        state: present
+
+    - name: Add MongoDB repository
+      apt_repository:
+        repo: "deb [arch=amd64] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 multiverse"
+        state: present
+        filename: mongodb-org-7.0
+
+    - name: Install MongoDB
+      apt:
+        name: mongodb-org
+        update_cache: true
+
+    - name: Start and enable MongoDB
+      systemd:
+        name: mongod
+        state: started
+        enabled: true
+
+    - name: Add Open5GS PPA
+      apt_repository:
+        repo: ppa:open5gs/latest
+
+    - name: Install Open5GS
+      apt:
+        name: open5gs
+        update_cache: true
+
+    - name: Start 5G core
+      systemd:
+        name: open5gs
+        state: started
+        enabled: true
+
+
+---
+- name: Install UERANSIM
+  hosts: ueransim-ue
+  become: true
+
+  tasks:
+    - name: Install prerequisites
+      apt:
+        name:
+          - make
+          - gcc
+          - g++
+          - libsctp-dev 
+          - lksctp-tools
+          - iproute2
+          - software-properties-common
+          - git
+        state: present
+        update_cache: true
+
+    - name: Install CMAKE
+      become: true
+      apt: 
+        name: cmake
+        state: present
+
+    - name: Clone UERANSIM
+      git:
+        repo: https://github.com/aligungr/UERANSIM
+        dest: /home/ubuntu/UERANSIM
+        version: master          # pin to a commit if matching free5GC
+
+    - name: Build UERANSIM
+      make:
+        chdir: /home/ubuntu/UERANSIM
+
+---
+- name: Install UERANSIM
+  hosts: ueransim-gnb
+  become: true
+
+  tasks:
+    - name: Install prerequisites
+      apt:
+        name:
+          - make
+          - gcc
+          - g++
+          - libsctp-dev 
+          - lksctp-tools
+          - iproute2
+          - software-properties-common
+          - git
+        state: present
+        update_cache: true
+
+    - name: Install CMAKE
+      become: true
+      apt: 
+        name: cmake
+        state: present
+
+    - name: Clone UERANSIM
+      git:
+        repo: https://github.com/aligungr/UERANSIM
+        dest: /home/ubuntu/UERANSIM
+        version: master          # pin to a commit if matching free5GC
+
+    - name: Build UERANSIM
+      make:
+        chdir: /home/ubuntu/UERANSIM
+
