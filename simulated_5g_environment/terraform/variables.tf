@@ -53,7 +53,6 @@ variable "ue_opc" {
   default = "E8ED289DEBA952E4283B54E88E6183CA"
 }
 
-.
 variable "ue_static_ip_base" {
   description = "CIDR the per-instance static UE IPs are numbered from (instance index + ue_static_ip_offset is the host number)."
   type        = string
