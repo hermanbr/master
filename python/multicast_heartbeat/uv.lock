@@ -1,0 +1,23 @@
+version = 1
+revision = 3
+requires-python = ">=3.14"
+
+[[package]]
+name = "multicast"
+version = "2.1.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/a2/84/f9f6b4d304b2b19cf8c1e4e24d6373254d1702eb35d5c57926429e168116/multicast-2.1.1.tar.gz", hash = "sha256:f0a241e0fac342b807908c4100ab3e154735a4737aa652e05f027de67342841f", size = 48504, upload-time = "2026-03-04T19:44:37.22Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/ee/1c/5f62f22eee1822ab90e1be9d6be8c22036f53816ad766fea745e16bdc02a/multicast-2.1.1-py3-none-any.whl", hash = "sha256:f7ee65697591b3c7303c0a6d3410b378742120ae8dd60cc41335d1de830ebd12", size = 53699, upload-time = "2026-03-04T19:44:35.98Z" },
+]
+
+[[package]]
+name = "multicast-heartbeat"
+version = "0.1.0"
+source = { editable = "." }
+dependencies = [
+    { name = "multicast" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "multicast", specifier = ">=2.1.1" }]

@@ -232,6 +232,7 @@
           - iproute2
           - software-properties-common
           - git
+          - curl 
         state: present
         update_cache: true
 
@@ -239,6 +240,12 @@
       apt:
         name: cmake
         state: present
+
+    - name: Install uv via curl
+      become: false 
+      ansible.builtin.shell: curl -LsSf https://astral.sh/uv/install.sh | sh
+      args:
+        creates: /home/ubuntu/.local/bin/uv
 
     - name: Clone UERANSIM
       git:
