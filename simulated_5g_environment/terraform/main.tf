@@ -68,8 +68,8 @@ resource "local_file" "ansible_inventory" {
     [""],
     ["[ueransim_ue]"],
     [
-      for instance in openstack_compute_instance_v2.ueransim-ue :
-      "${instance.access_ip_v4} ansible_user=ubuntu ansible_ssh_private_key_file=${var.ssh_private_key_file}"
+      for idx, instance in openstack_compute_instance_v2.ueransim-ue :
+      "${instance.access_ip_v4} ansible_user=ubuntu ansible_ssh_private_key_file=${var.ssh_private_key_file} test_imsi=${var.ue_imsi_prefix}${idx + 1} test_key=${var.ue_key} test_opc=${var.ue_opc} test_static_ip=${cidrhost(var.ue_static_ip_base, var.ue_static_ip_offset + idx)}"
     ],
     [""]
   ))

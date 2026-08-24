@@ -1,0 +1,8 @@
+.git
+keystone_rc.sh
+terraform/.terraform/
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
+terraform/terraform.tfvars
+ansible/inventory.ini
+*.retry

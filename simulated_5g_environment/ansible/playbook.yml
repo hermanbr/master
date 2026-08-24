@@ -1,0 +1,287 @@
+---
+- name: Install and configure Open5GS core
+  hosts: open5gs
+  become: true
+
+  tasks:
+    - name: Install prerequisites
+      apt:
+        name:
+          - gnupg
+          - curl
+          - software-properties-common
+        update_cache: true
+
+    - name: Add MongoDB apt key
+      apt_key:
+        url: https://pgp.mongodb.com/server-7.0.asc
+        state: present
+
+    - name: Add MongoDB repository
+      apt_repository:
+        repo: "deb [arch=amd64] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 multiverse"
+        state: present
+        filename: mongodb-org-7.0
+
+    - name: Install MongoDB
+      apt:
+        name: mongodb-org
+        update_cache: true
+
+    - name: Start and enable MongoDB
+      systemd:
+        name: mongod
+        state: started
+        enabled: true
+
+    # -----------------------
+    # Install 5GS
+    # -----------------------
+
+    - name: Add Open5GS PPA
+      apt_repository:
+        repo: ppa:open5gs/latest
+
+    - name: Install Open5GS
+      apt:
+        name: open5gs
+        state: present
+        update_cache: true
+      # apt's postinst already enables + starts every open5gs-*d service
+      # with the default (loopback-only) config, so nothing to start here.
+
+    - name: Bind AMF NGAP (N2) to this VM's real IP
+      ansible.builtin.replace:
+        path: /etc/open5gs/amf.yaml
+        regexp: "ngap:\n    server:\n      - address: 127\\.0\\.0\\.5"
+        replace: "ngap:\n    server:\n      - address: {{ inventory_hostname }}"
+      notify: restart amf
+
+    - name: Bind UPF GTP-U (N3) to this VM's real IP
+      ansible.builtin.replace:
+        path: /etc/open5gs/upf.yaml
+        regexp: "gtpu:\n    server:\n      - address: 127\\.0\\.0\\.7"
+        replace: "gtpu:\n    server:\n      - address: {{ inventory_hostname }}"
+      notify: restart upf
+
+    - name: Apply AMF/UPF rebind now (so the tasks below see the real ogstun)
+      meta: flush_handlers
+
+    - name: Enable IPv4 forwarding
+      ansible.posix.sysctl:
+        name: net.ipv4.ip_forward
+        value: "1"
+        sysctl_set: true
+        state: present
+        reload: true
+
+    - name: Disable ICMP redirecting # core told UE to just directly instead of through core
+      ansible.posix.sysctl:
+        name: net.ipv4.conf.all.send_redirects
+        value: "0"
+        sysctl_set: true
+        state: present
+        reload: true
+
+    - name: Assign gateway IP to the UPF's ogstun interface
+      ansible.builtin.shell: |
+        ip addr show dev ogstun | grep -q 10.45.0.1/16 || ip addr add 10.45.0.1/16 dev ogstun
+      args:
+        executable: /bin/bash
+      changed_when: false
+      # If upfd hadn't finished creating ogstun yet, re-run the playbook.
+
+    - name: Disable ICMP redirectin ogstun # core told UE to just directly instead of through core
+      ansible.posix.sysctl:
+        name: net.ipv4.conf.ogstun.send_redirects
+        value: "0"
+        sysctl_set: true
+        state: present
+        reload: true
+
+
+    - name: NAT the UE subnet out to the internet
+      ansible.builtin.shell: |
+        iptables -t nat -C POSTROUTING -s 10.45.0.0/16 ! -o ogstun -j MASQUERADE 2>/dev/null || \
+        iptables -t nat -A POSTROUTING -s 10.45.0.0/16 ! -o ogstun -j MASQUERADE
+      args:
+        executable: /bin/bash
+      changed_when: false
+
+    - name: Install mongosh (needed by open5gs-dbctl)
+      apt:
+        name: mongodb-mongosh
+        state: present
+
+    - name: Download open5gs-dbctl
+      ansible.builtin.get_url:
+        url: https://raw.githubusercontent.com/open5gs/open5gs/main/misc/db/open5gs-dbctl
+        dest: /usr/local/bin/open5gs-dbctl
+        mode: "0755"
+
+    - name: Add test subscribers (idempotent)
+      ansible.builtin.shell: |
+        open5gs-dbctl showall | grep -q {{ hostvars[item].test_imsi }} || \
+        open5gs-dbctl add {{ hostvars[item].test_imsi }} {{ hostvars[item].test_key }} {{ hostvars[item].test_opc }}
+      args:
+        executable: /bin/bash
+      loop: "{{ groups['ueransim_ue'] }}"
+      changed_when: false
+
+    - name: Pin each subscriber to a static PDU session IP
+      # So the tunnel address a UE gets is stable across restarts/
+      # re-registrations, letting apps on one UE hardcode the other UE's
+      # address instead of discovering it at runtime.
+      ansible.builtin.shell: |
+        open5gs-dbctl static_ip {{ hostvars[item].test_imsi }} {{ hostvars[item].test_static_ip }}
+      args:
+        executable: /bin/bash
+      loop: "{{ groups['ueransim_ue'] }}"
+      changed_when: false
+
+  handlers:
+    - name: restart amf
+      systemd:
+        name: open5gs-amfd
+        state: restarted
+
+    - name: restart upf
+      systemd:
+        name: open5gs-upfd
+        state: restarted
+
+
+# ----------------------------------------------
+# UERANSIM SETUP
+# ----------------------------------------------
+
+- name: Install and configure UERANSIM gNB
+  hosts: ueransim_gnb
+  become: true
+
+  tasks:
+    - name: Install prerequisites
+      apt:
+        name:
+          - make
+          - gcc
+          - g++
+          - libsctp-dev
+          - lksctp-tools
+          - iproute2
+          - software-properties-common
+          - git
+        state: present
+        update_cache: true
+
+    - name: Install CMake
+      apt:
+        name: cmake
+        state: present
+
+    - name: Clone UERANSIM
+      git:
+        repo: https://github.com/aligungr/UERANSIM
+        dest: /home/ubuntu/UERANSIM
+        version: master
+
+    - name: Build UERANSIM
+      make:
+        chdir: /home/ubuntu/UERANSIM
+
+    - name: Render gNB config
+      template:
+        src: gnb.yaml.j2
+        dest: /home/ubuntu/UERANSIM/config/gnb.yaml
+      notify: restart nr-gnb
+
+    - name: Install nr-gnb systemd service
+      template:
+        src: nr-gnb.service.j2
+        dest: /etc/systemd/system/nr-gnb.service
+      notify: restart nr-gnb
+
+    - name: Enable nr-gnb service
+      systemd:
+        name: nr-gnb
+        enabled: true
+        state: started
+        daemon_reload: true
+
+  handlers:
+    - name: restart nr-gnb
+      systemd:
+        name: nr-gnb
+        state: restarted
+        daemon_reload: true
+
+
+- name: Install and configure UERANSIM UE
+  hosts: ueransim_ue
+  become: true
+
+  tasks:
+    - name: Install prerequisites
+      apt:
+        name:
+          - make
+          - gcc
+          - g++
+          - libsctp-dev
+          - lksctp-tools
+          - iproute2
+          - software-properties-common
+          - git
+        state: present
+        update_cache: true
+
+    - name: Install CMake
+      apt:
+        name: cmake
+        state: present
+
+    - name: Clone UERANSIM
+      git:
+        repo: https://github.com/aligungr/UERANSIM
+        dest: /home/ubuntu/UERANSIM
+        version: master
+
+    - name: Build UERANSIM
+      make:
+        chdir: /home/ubuntu/UERANSIM
+
+    - name: Render UE config
+      template:
+        src: ue.yaml.j2
+        dest: /home/ubuntu/UERANSIM/config/ue.yaml
+      notify: restart nr-ue
+
+    - name: Install nr-ue systemd service
+      template:
+        src: nr-ue.service.j2
+        dest: /etc/systemd/system/nr-ue.service
+      notify: restart nr-ue
+
+    - name: Enable nr-ue service
+      systemd:
+        name: nr-ue
+        enabled: true
+        state: started
+        daemon_reload: true
+
+  handlers:
+    - name: restart nr-ue
+      systemd:
+        name: nr-ue
+        state: restarted
+        daemon_reload: true
+      notify: settle before clean nr-ue restart
+
+    - name: settle before clean nr-ue restart
+      ansible.builtin.command: sleep 5
+      notify: clean restart nr-ue
+
+    - name: clean restart nr-ue
+      systemd:
+        name: nr-ue
+        state: restarted

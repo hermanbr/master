@@ -1,0 +1,13 @@
+[Unit]
+Description=UERANSIM gNB
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/ubuntu/UERANSIM
+ExecStart=/home/ubuntu/UERANSIM/build/nr-gnb -c /home/ubuntu/UERANSIM/config/gnb.yaml
+Restart=on-failure
+User=root
+
+[Install]
+WantedBy=multi-user.target

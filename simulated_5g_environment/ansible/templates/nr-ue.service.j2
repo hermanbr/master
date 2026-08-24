@@ -1,0 +1,13 @@
+[Unit]
+Description=UERANSIM UE
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/ubuntu/UERANSIM
+ExecStart=/home/ubuntu/UERANSIM/build/nr-ue -c /home/ubuntu/UERANSIM/config/ue.yaml
+Restart=on-failure
+User=root
+
+[Install]
+WantedBy=multi-user.target
