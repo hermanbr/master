@@ -1,10 +1,11 @@
 import json
 import socket
 
-port: int = 4567 
+port: int = 4567
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.bind(("", port))
+
 
 def main():
 

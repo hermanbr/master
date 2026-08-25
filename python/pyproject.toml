@@ -1,0 +1,5 @@
+[tool.uv.workspace]
+members = ["heartbeat", "multicast_heartbeat"]
+
+[dependency-groups]
+dev = ["ruff", "ty"]

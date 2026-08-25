@@ -21,3 +21,6 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [{ name = "multicast", specifier = ">=2.1.1" }]
+
+[package.metadata.requires-dev]
+dev = []

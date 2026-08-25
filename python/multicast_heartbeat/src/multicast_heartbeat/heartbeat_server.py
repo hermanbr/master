@@ -7,12 +7,13 @@ port: int = 4567
 
 sender = send.McastSAY()
 
+
 def main():
     seq = 0
     while True:
         payload = json.dumps({"seq": seq, "time": time.time()}).encode("utf-8")
 
-        sender(group='224.0.0.1', port=port, ttl=1, data=payload)
+        sender(group="224.0.0.1", port=port, ttl=1, data=payload)
 
         print(f"sent seq={seq} to multicast:{port}")
         seq += 1

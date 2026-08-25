@@ -1,0 +1,25 @@
+
+
+repos:
+  - repo: local
+    hooks:
+      - id: ruff-check
+        name: ruff lint
+        entry: uv run --project python ruff check --force-exclude --fix
+        language: system
+        files: ^python/.*\.py$
+        types_or: [python]
+
+      - id: ruff-format
+        name: ruff format
+        entry: uv run --project python ruff format --force-exclude
+        language: system
+        files: ^python/.*\.py$
+        types_or: [python]
+
+      - id: ty # typecheck
+        name: ty
+        entry: uv run --project python ty check
+        language: system
+        files: ^python/.*\.py$
+        types: [python]

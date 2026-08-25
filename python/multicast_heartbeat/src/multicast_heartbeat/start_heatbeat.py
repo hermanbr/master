@@ -16,33 +16,90 @@ def ssh(host, cmd):
     return f"ssh -t -i {KEY} ubuntu@{host} '{cmd}'"
 
 
+def run_subprocess(args):
+    subprocess.run(args=args, check=True)
+
+
+def try_run_subprocess(args):
+    """Processes called here are allowed to fail. E.g. tmux and pkill processes"""
+    try:
+        run_subprocess(args=args)
+    except subprocess.CalledProcessError:
+        pass
+
+
 def deploy(host):
-    subprocess.run(["ssh", "-i", KEY, f"ubuntu@{host}", "rm -rf ~/multicast_heartbeat"])
-    subprocess.run(["scp", "-r", "-i", KEY, str(LOCAL_PROJECT), f"ubuntu@{host}:~/multicast_heartbeat"])
-    # .venv/dist came along for the ride from the local (macOS) copy and are
-    # the wrong platform - drop them so uv sync builds a fresh Linux one.
-    subprocess.run(["ssh", "-i", KEY, f"ubuntu@{host}", "rm -rf ~/multicast_heartbeat/.venv ~/multicast_heartbeat/dist"])
-    subprocess.run(["ssh", "-i", KEY, f"ubuntu@{host}", f"cd multicast_heartbeat && {UV} sync"])
+    run_subprocess(["ssh", "-i", KEY, f"ubuntu@{host}", "rm -rf ~/multicast_heartbeat"])
+    run_subprocess(
+        [
+            "scp",
+            "-r",
+            "-i",
+            KEY,
+            str(LOCAL_PROJECT),
+            f"ubuntu@{host}:~/multicast_heartbeat",
+        ]
+    )
+    run_subprocess(
+        [
+            "ssh",
+            "-i",
+            KEY,
+            f"ubuntu@{host}",
+            "rm -rf ~/multicast_heartbeat/.venv ~/multicast_heartbeat/dist",
+        ]
+    )
+    run_subprocess(
+        ["ssh", "-i", KEY, f"ubuntu@{host}", f"cd multicast_heartbeat && {UV} sync"]
+    )
 
 
 def main():
     deploy(UE0)
     deploy(UE1)
 
-    subprocess.run(["ssh", "-i", KEY, f"ubuntu@{UE0}", "pkill -f heartbeat_client.py"])
-    subprocess.run(["ssh", "-i", KEY, f"ubuntu@{UE1}", "pkill -f heartbeat_server.py"])
+    run_subprocess(["ssh", "-i", KEY, f"ubuntu@{UE0}", "pkill -f heartbeat_client.py"])
+    run_subprocess(["ssh", "-i", KEY, f"ubuntu@{UE1}", "pkill -f heartbeat_server.py"])
 
-    subprocess.run(["tmux", "kill-session", "-t", SESSION], stderr=subprocess.DEVNULL)
-    subprocess.run(["tmux", "new-session", "-d", "-s", SESSION,
-                     ssh(UE0, f"cd multicast_heartbeat && {UV} run src/multicast_heartbeat/heartbeat_client.py")])
-    subprocess.run(["tmux", "split-window", "-h", "-t", SESSION,
-                     ssh(UE1, f"cd multicast_heartbeat && {UV} run src/multicast_heartbeat/heartbeat_server.py")])
-    # UE<->UE traffic never touches ogstun - Open5GS relays it directly at
-    # the GTP-U layer inside upfd. Capture the N3 link to the gNB instead,
-    # since every packet for both UEs crosses it either way.
-    subprocess.run(["tmux", "split-window", "-v", "-t", SESSION, ssh(CORE, "sudo tcpdump -i enp3s0 -n udp port 2152")])
-    subprocess.run(["tmux", "select-layout", "-t", SESSION, "tiled"])
-    subprocess.run(["tmux", "attach-session", "-t", SESSION])
+    try_run_subprocess(["tmux", "kill-session", "-t", SESSION])
+    try_run_subprocess(
+        [
+            "tmux",
+            "new-session",
+            "-d",
+            "-s",
+            SESSION,
+            ssh(
+                UE0,
+                f"cd multicast_heartbeat && {UV} run src/multicast_heartbeat/heartbeat_client.py",
+            ),
+        ]
+    )
+    try_run_subprocess(
+        [
+            "tmux",
+            "split-window",
+            "-h",
+            "-t",
+            SESSION,
+            ssh(
+                UE1,
+                f"cd multicast_heartbeat && {UV} run src/multicast_heartbeat/heartbeat_server.py",
+            ),
+        ]
+    )
+    try_run_subprocess(
+        [
+            "tmux",
+            "split-window",
+            "-v",
+            "-t",
+            SESSION,
+            ssh(CORE, "sudo tcpdump -i enp3s0 -n udp port 2152"),
+        ]
+    )
+    try_run_subprocess(["tmux", "select-layout", "-t", SESSION, "tiled"])
+    try_run_subprocess(["tmux", "attach-session", "-t", SESSION])
 
 
 if __name__ == "__main__":
