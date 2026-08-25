@@ -12,7 +12,7 @@ repos:
 
       - id: ruff-format
         name: ruff format
-        entry: uv run --project python ruff format --force-exclude
+        entry: bash c 'uv run --project python ruff format --force-exclude "$@" && git add -- "$@"' -- ## re-add files when formatted
         language: system
         files: ^python/.*\.py$
         types_or: [python]
