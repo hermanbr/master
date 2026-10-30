@@ -1,0 +1,5 @@
+# Directory labels
+ support
+# Source files and their labels
+/home/raj/chatgpt/sdr-mbs/ocudu/tests/unittests/support/synchronization/stop_event_test.cpp
+/home/raj/chatgpt/sdr-mbs/ocudu/tests/unittests/support/synchronization/sync_event_test.cpp

@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_exec_metrics_app_service.a CMakeFiles/ocudu_exec_metrics_app_service.dir/executor_metrics_config_cli11_schema.cpp.o CMakeFiles/ocudu_exec_metrics_app_service.dir/executor_metrics_config_yaml_writer.cpp.o CMakeFiles/ocudu_exec_metrics_app_service.dir/metrics/app_execution_metrics_builder.cpp.o
+/usr/bin/ranlib libocudu_exec_metrics_app_service.a

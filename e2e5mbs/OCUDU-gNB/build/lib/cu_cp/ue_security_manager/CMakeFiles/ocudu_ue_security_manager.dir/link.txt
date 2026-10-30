@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_ue_security_manager.a CMakeFiles/ocudu_ue_security_manager.dir/ue_security_manager_impl.cpp.o
+/usr/bin/ranlib libocudu_ue_security_manager.a

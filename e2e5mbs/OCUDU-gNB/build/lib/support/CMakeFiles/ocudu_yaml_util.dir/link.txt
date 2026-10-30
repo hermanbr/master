@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_yaml_util.a CMakeFiles/ocudu_yaml_util.dir/config_yaml.cpp.o
+/usr/bin/ranlib libocudu_yaml_util.a

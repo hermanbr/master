@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_flexible_o_du_helpers.a CMakeFiles/ocudu_flexible_o_du_helpers.dir/flexible_o_du_factory.cpp.o CMakeFiles/ocudu_flexible_o_du_helpers.dir/flexible_o_du_impl.cpp.o CMakeFiles/ocudu_flexible_o_du_helpers.dir/flexible_o_du_metrics_aggregator.cpp.o CMakeFiles/ocudu_flexible_o_du_helpers.dir/flexible_o_du_ntn_configuration_manager_factory.cpp.o CMakeFiles/ocudu_flexible_o_du_helpers.dir/commands/ntn_config_update_remote_command_factory.cpp.o
+/usr/bin/ranlib libocudu_flexible_o_du_helpers.a

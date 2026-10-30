@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_lower_phy_uplink_processor.a CMakeFiles/ocudu_lower_phy_uplink_processor.dir/uplink_processor_factories.cpp.o CMakeFiles/ocudu_lower_phy_uplink_processor.dir/uplink_processor_impl.cpp.o
+/usr/bin/ranlib libocudu_lower_phy_uplink_processor.a

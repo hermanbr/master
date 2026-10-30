@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_sdap.a CMakeFiles/ocudu_sdap.dir/sdap_factory.cpp.o
+/usr/bin/ranlib libocudu_sdap.a

@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_tracing_app_helpers.a CMakeFiles/ocudu_tracing_app_helpers.dir/tracer_appconfig_cli11_schema.cpp.o CMakeFiles/ocudu_tracing_app_helpers.dir/tracer_appconfig_yaml_writer.cpp.o
+/usr/bin/ranlib libocudu_tracing_app_helpers.a

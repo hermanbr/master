@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_f1u_connector.a CMakeFiles/ocudu_f1u_connector.dir/local_connector/f1u_local_connector.cpp.o
+/usr/bin/ranlib libocudu_f1u_connector.a

@@ -1,0 +1,22 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/raj/chatgpt/sdr-mbs/ocudu/tests/unittests/cu_cp/mobility/mobility_test_helpers.cpp"
+		},
+		{
+			"file" : "/home/raj/chatgpt/sdr-mbs/ocudu/tests/unittests/cu_cp/du_processor_test_messages.cpp"
+		},
+		{
+			"file" : "/home/raj/chatgpt/sdr-mbs/ocudu/tests/unittests/cu_cp/test_helpers.cpp"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"cu_cp"
+		],
+		"name" : "mobility_test_helpers"
+	}
+}

@@ -1,0 +1,19 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/raj/chatgpt/sdr-mbs/ocudu/tests/unittests/scheduler/test_utils/config_generators.cpp"
+		},
+		{
+			"file" : "/home/raj/chatgpt/sdr-mbs/ocudu/tests/unittests/scheduler/test_utils/indication_generators.cpp"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"sched"
+		],
+		"name" : "scheduler_test_utils"
+	}
+}

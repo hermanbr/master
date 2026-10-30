@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_phy_metrics.a CMakeFiles/ocudu_phy_metrics.dir/phy_metrics_factories.cpp.o
+/usr/bin/ranlib libocudu_phy_metrics.a

@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_upper_phy.a CMakeFiles/ocudu_upper_phy.dir/upper_phy_error_handler_impl.cpp.o CMakeFiles/ocudu_upper_phy.dir/upper_phy_factories.cpp.o CMakeFiles/ocudu_upper_phy.dir/upper_phy_impl.cpp.o CMakeFiles/ocudu_upper_phy.dir/upper_phy_rx_results_notifier_wrapper.cpp.o CMakeFiles/ocudu_upper_phy.dir/upper_phy_rx_symbol_handler_impl.cpp.o
+/usr/bin/ranlib libocudu_upper_phy.a

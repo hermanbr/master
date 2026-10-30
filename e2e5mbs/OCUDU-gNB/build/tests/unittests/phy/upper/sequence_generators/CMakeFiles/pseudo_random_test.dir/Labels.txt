@@ -1,0 +1,4 @@
+# Directory labels
+ phy
+# Source files and their labels
+/home/raj/chatgpt/sdr-mbs/ocudu/tests/unittests/phy/upper/sequence_generators/pseudo_random_generator_test.cpp

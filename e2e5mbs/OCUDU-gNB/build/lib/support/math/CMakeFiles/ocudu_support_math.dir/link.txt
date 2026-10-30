@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_support_math.a CMakeFiles/ocudu_support_math.dir/math_utils.cpp.o CMakeFiles/ocudu_support_math.dir/curve_fitting_find_max.cpp.o
+/usr/bin/ranlib libocudu_support_math.a

@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_gtpu.a CMakeFiles/ocudu_gtpu.dir/gtpu_tunnel_ngu_factory.cpp.o CMakeFiles/ocudu_gtpu.dir/gtpu_tunnel_nru_factory.cpp.o CMakeFiles/ocudu_gtpu.dir/gtpu_pdu.cpp.o CMakeFiles/ocudu_gtpu.dir/gtpu_demux_factory.cpp.o CMakeFiles/ocudu_gtpu.dir/gtpu_echo_factory.cpp.o CMakeFiles/ocudu_gtpu.dir/gtpu_teid_pool_factory.cpp.o CMakeFiles/ocudu_gtpu.dir/gtpu_demux_impl.cpp.o CMakeFiles/ocudu_gtpu.dir/gtpu_gateway.cpp.o
+/usr/bin/ranlib libocudu_gtpu.a

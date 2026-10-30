@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_radio_zmq.a CMakeFiles/ocudu_radio_zmq.dir/radio_config_zmq_validator.cpp.o CMakeFiles/ocudu_radio_zmq.dir/radio_factory_zmq_impl.cpp.o CMakeFiles/ocudu_radio_zmq.dir/radio_session_zmq_impl.cpp.o CMakeFiles/ocudu_radio_zmq.dir/radio_zmq_rx_channel.cpp.o CMakeFiles/ocudu_radio_zmq.dir/radio_zmq_rx_stream.cpp.o CMakeFiles/ocudu_radio_zmq.dir/radio_zmq_tx_channel.cpp.o CMakeFiles/ocudu_radio_zmq.dir/radio_zmq_tx_stream.cpp.o
+/usr/bin/ranlib libocudu_radio_zmq.a

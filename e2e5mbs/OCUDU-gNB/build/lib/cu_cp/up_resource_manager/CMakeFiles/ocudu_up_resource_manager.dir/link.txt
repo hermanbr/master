@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_up_resource_manager.a CMakeFiles/ocudu_up_resource_manager.dir/up_resource_manager_impl.cpp.o CMakeFiles/ocudu_up_resource_manager.dir/up_resource_manager_helpers.cpp.o
+/usr/bin/ranlib libocudu_up_resource_manager.a

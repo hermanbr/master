@@ -1,0 +1,5 @@
+# Directory labels
+ du_manager
+ du_high
+# Source files and their labels
+/home/raj/chatgpt/sdr-mbs/ocudu/tests/unittests/du_manager/du_periodic_srs_res_mng_test.cpp

@@ -1,0 +1,28 @@
+
+# Consider dependencies only in project.
+set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
+
+# The set of languages for which implicit dependencies are needed:
+set(CMAKE_DEPENDS_LANGUAGES
+  )
+
+# The set of dependency files which are needed:
+set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/dwijesek/chatgpt/sdr-mbs-june-10/sdr-mbs/ocudu/apps/units/flexible_o_du/o_du_high/du_high/metrics/du_high_rlc_metrics_consumers.cpp" "apps/units/flexible_o_du/o_du_high/du_high/metrics/CMakeFiles/ocudu_du_high_unit_metrics_helpers.dir/du_high_rlc_metrics_consumers.cpp.o" "gcc" "apps/units/flexible_o_du/o_du_high/du_high/metrics/CMakeFiles/ocudu_du_high_unit_metrics_helpers.dir/du_high_rlc_metrics_consumers.cpp.o.d"
+  "/home/dwijesek/chatgpt/sdr-mbs-june-10/sdr-mbs/ocudu/apps/units/flexible_o_du/o_du_high/du_high/metrics/du_high_rlc_metrics_producer.cpp" "apps/units/flexible_o_du/o_du_high/du_high/metrics/CMakeFiles/ocudu_du_high_unit_metrics_helpers.dir/du_high_rlc_metrics_producer.cpp.o" "gcc" "apps/units/flexible_o_du/o_du_high/du_high/metrics/CMakeFiles/ocudu_du_high_unit_metrics_helpers.dir/du_high_rlc_metrics_producer.cpp.o.d"
+  "/home/dwijesek/chatgpt/sdr-mbs-june-10/sdr-mbs/ocudu/apps/units/flexible_o_du/o_du_high/du_high/metrics/du_metrics_consumers.cpp" "apps/units/flexible_o_du/o_du_high/du_high/metrics/CMakeFiles/ocudu_du_high_unit_metrics_helpers.dir/du_metrics_consumers.cpp.o" "gcc" "apps/units/flexible_o_du/o_du_high/du_high/metrics/CMakeFiles/ocudu_du_high_unit_metrics_helpers.dir/du_metrics_consumers.cpp.o.d"
+  "/home/dwijesek/chatgpt/sdr-mbs-june-10/sdr-mbs/ocudu/apps/units/flexible_o_du/o_du_high/du_high/metrics/du_metrics_producer.cpp" "apps/units/flexible_o_du/o_du_high/du_high/metrics/CMakeFiles/ocudu_du_high_unit_metrics_helpers.dir/du_metrics_producer.cpp.o" "gcc" "apps/units/flexible_o_du/o_du_high/du_high/metrics/CMakeFiles/ocudu_du_high_unit_metrics_helpers.dir/du_metrics_producer.cpp.o.d"
+  )
+
+# Targets to which this target links.
+set(CMAKE_TARGET_LINKED_INFO_FILES
+  "/home/dwijesek/chatgpt/sdr-mbs-june-10/sdr-mbs/ocudu/build/apps/units/flexible_o_du/o_du_high/du_high/metrics/consumers/CMakeFiles/ocudu_du_high_unit_metrics_consumers.dir/DependInfo.cmake"
+  "/home/dwijesek/chatgpt/sdr-mbs-june-10/sdr-mbs/ocudu/build/apps/helpers/metrics/json_generators/CMakeFiles/ocudu_metrics_json_generators.dir/DependInfo.cmake"
+  "/home/dwijesek/chatgpt/sdr-mbs-june-10/sdr-mbs/ocudu/build/apps/helpers/metrics/json_generators/cu_cp/CMakeFiles/ocudu_cu_cp_metrics_json_generators_helpers.dir/DependInfo.cmake"
+  "/home/dwijesek/chatgpt/sdr-mbs-june-10/sdr-mbs/ocudu/build/apps/helpers/metrics/json_generators/cu_up/CMakeFiles/ocudu_cu_up_metrics_json_generators_helpers.dir/DependInfo.cmake"
+  "/home/dwijesek/chatgpt/sdr-mbs-june-10/sdr-mbs/ocudu/build/apps/helpers/metrics/json_generators/du_high/CMakeFiles/ocudu_du_high_metrics_json_generators_helpers.dir/DependInfo.cmake"
+  "/home/dwijesek/chatgpt/sdr-mbs-june-10/sdr-mbs/ocudu/build/apps/helpers/metrics/json_generators/ru/CMakeFiles/ocudu_ru_metrics_json_generators_helpers.dir/DependInfo.cmake"
+  )
+
+# Fortran module output directory.
+set(CMAKE_Fortran_TARGET_MODULE_DIR "")

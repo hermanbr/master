@@ -1,0 +1,16 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/raj/chatgpt/sdr-mbs/ocudu/tests/unittests/scheduler/support/dmrs_helpers_test.cpp"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"sched"
+		],
+		"name" : "dmrs_helpers_test"
+	}
+}

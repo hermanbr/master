@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_radio_uhd.a CMakeFiles/ocudu_radio_uhd.dir/radio_config_uhd_validator.cpp.o CMakeFiles/ocudu_radio_uhd.dir/radio_uhd_impl.cpp.o CMakeFiles/ocudu_radio_uhd.dir/radio_uhd_rx_stream.cpp.o CMakeFiles/ocudu_radio_uhd.dir/radio_uhd_tx_stream.cpp.o
+/usr/bin/ranlib libocudu_radio_uhd.a

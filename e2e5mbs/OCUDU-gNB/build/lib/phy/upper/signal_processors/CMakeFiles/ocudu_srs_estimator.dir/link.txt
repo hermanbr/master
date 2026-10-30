@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_srs_estimator.a CMakeFiles/ocudu_srs_estimator.dir/srs/srs_estimator_factory.cpp.o CMakeFiles/ocudu_srs_estimator.dir/srs/srs_estimator_generic_impl.cpp.o CMakeFiles/ocudu_srs_estimator.dir/srs/srs_validator_generic_impl.cpp.o
+/usr/bin/ranlib libocudu_srs_estimator.a

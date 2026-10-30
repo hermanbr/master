@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_pucch_processor.a CMakeFiles/ocudu_pucch_processor.dir/factories.cpp.o CMakeFiles/ocudu_pucch_processor.dir/pucch_processor_impl.cpp.o
+/usr/bin/ranlib libocudu_pucch_processor.a

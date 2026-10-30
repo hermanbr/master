@@ -1,0 +1,17 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/raj/chatgpt/sdr-mbs/ocudu/tests/unittests/du_manager/du_ue/du_bearer_test.cpp"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"du_manager",
+			"du_high"
+		],
+		"name" : "du_bearer_test"
+	}
+}

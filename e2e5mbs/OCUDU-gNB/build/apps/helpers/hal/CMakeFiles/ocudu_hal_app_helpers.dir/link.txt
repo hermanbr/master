@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_hal_app_helpers.a CMakeFiles/ocudu_hal_app_helpers.dir/hal_cli11_schema.cpp.o
+/usr/bin/ranlib libocudu_hal_app_helpers.a

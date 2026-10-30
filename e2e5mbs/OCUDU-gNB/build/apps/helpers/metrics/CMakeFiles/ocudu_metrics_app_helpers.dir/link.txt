@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_metrics_app_helpers.a CMakeFiles/ocudu_metrics_app_helpers.dir/metrics_config_cli11_schema.cpp.o CMakeFiles/ocudu_metrics_app_helpers.dir/metrics_config_yaml_writer.cpp.o CMakeFiles/ocudu_metrics_app_helpers.dir/metrics_helpers.cpp.o
+/usr/bin/ranlib libocudu_metrics_app_helpers.a

@@ -1,0 +1,19 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/raj/chatgpt/sdr-mbs/ocudu/tests/unittests/adt/soa_table_test.cpp"
+		},
+		{
+			"file" : "/home/raj/chatgpt/sdr-mbs/ocudu/tests/unittests/adt/stable_id_map_test.cpp"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"adt"
+		],
+		"name" : "soa_table_test"
+	}
+}

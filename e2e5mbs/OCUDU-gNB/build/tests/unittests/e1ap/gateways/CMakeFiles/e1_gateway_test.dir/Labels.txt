@@ -1,0 +1,4 @@
+# Directory labels
+ e1ap
+# Source files and their labels
+/home/raj/chatgpt/sdr-mbs/ocudu/tests/unittests/e1ap/gateways/e1_gateway_test.cpp

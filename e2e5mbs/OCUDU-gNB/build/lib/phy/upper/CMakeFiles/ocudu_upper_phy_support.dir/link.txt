@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_upper_phy_support.a CMakeFiles/ocudu_upper_phy_support.dir/rx_buffer_pool_impl.cpp.o
+/usr/bin/ranlib libocudu_upper_phy_support.a

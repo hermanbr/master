@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_fapi_precoding_matrix_tools.a CMakeFiles/ocudu_fapi_precoding_matrix_tools.dir/precoding_matrix_mapper.cpp.o CMakeFiles/ocudu_fapi_precoding_matrix_tools.dir/precoding_matrix_repository.cpp.o CMakeFiles/ocudu_fapi_precoding_matrix_tools.dir/precoding_matrix_table_generator.cpp.o
+/usr/bin/ranlib libocudu_fapi_precoding_matrix_tools.a

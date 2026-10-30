@@ -1,0 +1,96 @@
+gnb_id: 1
+
+cu_cp:
+  amf:
+    addrs: amf-with-mbs.5g-mag.org
+    port: 38412
+    bind_addrs: 10.33.33.16
+    supported_tracking_areas:
+      - tac: 1
+        plmn_list:
+          - plmn: "99970"
+            tai_slice_support_list:
+              - sst: 1
+                sd: 16777215
+  inactivity_timer: 7200
+
+ru_sdr:
+  device_driver: uhd
+  device_args: type=b200,num_recv_frames=512,num_send_frames=512
+  srate: 23.04
+  otw_format: sc12
+  tx_gain: 80
+  rx_gain: 40
+
+cell_cfg:
+  dl_arfcn: 632628
+  band: 78
+  channel_bandwidth_MHz: 20
+  common_scs: 30
+  plmn: "99970"
+  tac: 1
+  pci: 1
+  slicing:
+    - sst: 1
+      sd: 16777215
+  pdcch:
+    common:
+      ss0_index: 0
+    dedicated:
+      ss2_type: common
+      dci_format_0_1_and_1_1: false
+  prach:
+    prach_config_index: 1
+  pdsch:
+    mcs_table: qam64
+  pusch:
+    mcs_table: qam64
+  sib:
+    si_window_length: 40
+    si_sched_info:
+      - si_period: 64
+        sib_mapping: 2
+      - si_period: 64
+        sib_mapping: 20
+        si_window_position: 2
+    sib2:
+      q_hyst: 3
+      thresh_serving_low_p: 0
+      cell_reselection_priority: 6
+      q_rx_lev_min: -70
+      s_intra_search_p: 62
+      t_reselection_nr: 1
+
+log:
+  filename: /tmp/ocudu_gnb_mbs.log
+  all_level: error
+  hex_max_size: 0
+
+pcap:
+  mac_enable: false
+  mac_filename: /tmp/ocudu_gnb_mbs_mac.pcap
+  ngap_enable: false
+  ngap_filename: /tmp/ocudu_gnb_mbs_ngap.pcap
+
+metrics:
+  autostart_stdout_metrics: false
+  enable_json: false
+
+expert_execution:
+  affinities:
+    main_pool_cpus: "2,3,4,5,6,7"
+    main_pool_pinning: mask
+  threads:
+    main_pool:
+      nof_threads: 6
+      task_queue_size: 8192
+      backoff_period: 0
+    lower_phy:
+      execution_profile: triple
+  cell_affinities:
+    - ru_cpus: "2,3,4,5,6,7"
+      ru_pinning: mask
+
+remote_control:
+  bind_addr: 0.0.0.0
+  enabled: true

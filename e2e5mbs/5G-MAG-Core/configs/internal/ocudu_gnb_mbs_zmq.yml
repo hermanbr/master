@@ -1,0 +1,80 @@
+gnb_id: 1
+
+cu_cp:
+  amf:
+    addrs: amf-with-mbs.5g-mag.org
+    port: 38412
+    bind_addrs: 10.33.33.16
+    supported_tracking_areas:
+      - tac: 1
+        plmn_list:
+          - plmn: "99970"
+            tai_slice_support_list:
+              - sst: 1
+                sd: 16777215
+  inactivity_timer: 7200
+
+ru_sdr:
+  device_driver: zmq
+  device_args: tx_port=tcp://10.33.33.16:2000,rx_port=tcp://10.33.33.30:2001,base_srate=23.04e6
+  srate: 23.04
+  tx_gain: 25
+  rx_gain: 25
+
+cell_cfg:
+  dl_arfcn: 632628
+  band: 78
+  channel_bandwidth_MHz: 20
+  common_scs: 30
+  plmn: "99970"
+  tac: 1
+  pci: 1
+  slicing:
+    - sst: 1
+      sd: 16777215
+  pdcch:
+    common:
+      ss0_index: 0
+    dedicated:
+      ss2_type: common
+      dci_format_0_1_and_1_1: false
+  prach:
+    prach_config_index: 1
+  pdsch:
+    mcs_table: qam64
+  pusch:
+    mcs_table: qam64
+  sib:
+    si_window_length: 40
+    si_sched_info:
+      - si_period: 64
+        sib_mapping: 2
+      - si_period: 64
+        sib_mapping: 20
+        si_window_position: 2
+    sib2:
+      q_hyst: 3
+      thresh_serving_low_p: 0
+      cell_reselection_priority: 6
+      q_rx_lev_min: -70
+      s_intra_search_p: 62
+      t_reselection_nr: 1
+
+log:
+  filename: /tmp/ocudu_gnb_mbs.log
+  all_level: info
+  hex_max_size: 0
+
+pcap:
+  mac_enable: true
+  mac_filename: /tmp/ocudu_gnb_mbs_mac.pcap
+  ngap_enable: true
+  ngap_filename: /tmp/ocudu_gnb_mbs_ngap.pcap
+
+metrics:
+  autostart_stdout_metrics: true
+  enable_json: true
+
+remote_control:
+  bind_addr: 0.0.0.0
+  enabled: true

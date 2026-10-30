@@ -1,0 +1,4 @@
+# Directory labels
+ gateways
+# Source files and their labels
+/home/raj/chatgpt/sdr-mbs/ocudu/tests/unittests/gateways/sctp_socket_test.cpp

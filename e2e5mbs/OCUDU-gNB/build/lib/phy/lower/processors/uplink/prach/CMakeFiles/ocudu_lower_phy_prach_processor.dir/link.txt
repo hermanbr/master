@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_lower_phy_prach_processor.a CMakeFiles/ocudu_lower_phy_prach_processor.dir/prach_processor_factories.cpp.o CMakeFiles/ocudu_lower_phy_prach_processor.dir/prach_processor_worker.cpp.o
+/usr/bin/ranlib libocudu_lower_phy_prach_processor.a

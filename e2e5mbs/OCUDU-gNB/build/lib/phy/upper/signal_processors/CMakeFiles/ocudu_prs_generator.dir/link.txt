@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_prs_generator.a CMakeFiles/ocudu_prs_generator.dir/prs/factories.cpp.o CMakeFiles/ocudu_prs_generator.dir/prs/prs_generator_impl.cpp.o
+/usr/bin/ranlib libocudu_prs_generator.a

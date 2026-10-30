@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_downlink_processor.a CMakeFiles/ocudu_downlink_processor.dir/downlink_processor_multi_executor_impl.cpp.o CMakeFiles/ocudu_downlink_processor.dir/downlink_processor_pool_impl.cpp.o
+/usr/bin/ranlib libocudu_downlink_processor.a

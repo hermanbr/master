@@ -1,0 +1,35 @@
+# Lean OAI nrUE image for the virtual MBS testbed (see VIRTUAL-TESTBED.md).
+#
+# Builds only nr-uesoftmodem + the ZMQ radio (oai_zmqdevif), instead of every
+# OAI target with -Werror like docker/Dockerfile.build.ubuntu. Runs on the
+# ran-base image, which already has all build and runtime dependencies.
+#
+#   docker build --target ran-base -t ran-base:latest -f docker/Dockerfile.base.ubuntu .
+#   docker build -t oai-nr-ue:mbs-local -f docker/Dockerfile.nrUE.zmq.ubuntu .
+
+FROM ran-base:latest
+ARG NUM_JOBS=8
+
+RUN rm -Rf /oai-ran
+WORKDIR /oai-ran
+COPY . .
+
+RUN --mount=type=cache,target=/root/.cache/ccache/ \
+    --mount=type=cache,target=/root/.cache/cpm/ \
+    /bin/sh oaienv && \
+    cd cmake_targets && \
+    mkdir -p log && \
+    ./build_oai -c --ninja --nrUE -w ZMQ --noavx512 --build-tool-opt -j${NUM_JOBS} || \
+    { tail -n 80 log/*.txt; exit 1; }
+
+RUN mkdir -p /opt/oai-nr-ue/bin /opt/oai-nr-ue/etc && \
+    cp cmake_targets/ran_build/build/nr-uesoftmodem /opt/oai-nr-ue/bin/ && \
+    cp docker/scripts/nr_ue_entrypoint.sh /opt/oai-nr-ue/bin/entrypoint.sh && \
+    find cmake_targets/ran_build/build -name '*.so*' -exec cp -P {} /usr/local/lib/ \; && \
+    ldconfig && \
+    ldd /opt/oai-nr-ue/bin/nr-uesoftmodem /usr/local/lib/liboai_zmqdevif.so | grep "not found" && exit 1 || true
+
+ENV PATH="/opt/oai-nr-ue/bin:$PATH"
+WORKDIR /opt/oai-nr-ue/etc
+CMD ["/opt/oai-nr-ue/bin/nr-uesoftmodem"]
+ENTRYPOINT ["/tini", "-v", "--", "/opt/oai-nr-ue/bin/entrypoint.sh"]

@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_e1_gateway.a CMakeFiles/ocudu_e1_gateway.dir/e1_local_connector_factory.cpp.o CMakeFiles/ocudu_e1_gateway.dir/e1_network_client_factory.cpp.o CMakeFiles/ocudu_e1_gateway.dir/e1_network_server_factory.cpp.o
+/usr/bin/ranlib libocudu_e1_gateway.a

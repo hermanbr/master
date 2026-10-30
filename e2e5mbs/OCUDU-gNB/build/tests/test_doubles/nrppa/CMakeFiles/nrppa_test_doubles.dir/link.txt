@@ -1,0 +1,2 @@
+/usr/bin/ar qc libnrppa_test_doubles.a CMakeFiles/nrppa_test_doubles.dir/Unity/unity_0_cxx.cxx.o
+/usr/bin/ranlib libnrppa_test_doubles.a

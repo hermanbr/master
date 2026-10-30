@@ -1,0 +1,30 @@
+# Lean OCUDU gNB image for the virtual MBS testbed (see VIRTUAL-TESTBED.md).
+#
+# Builds only the "gnb" app with the ZMQ radio, like the working local build
+# (DPDK off), instead of docker/Dockerfile which also builds the CU/DU splits,
+# ru_emulator, UHD and DPDK from source.
+#
+#   docker build -t ocudu/gnb:mbs-local -f docker/Dockerfile.gnb.zmq .
+
+ARG OS_VERSION=24.04
+
+FROM ubuntu:${OS_VERSION} AS builder
+ARG MARCH=native
+ARG NUM_JOBS=""
+ENV DEBIAN_FRONTEND=noninteractive
+
+COPY docker/scripts/install_dependencies.sh /tmp/
+RUN /tmp/install_dependencies.sh build
+
+ADD . /src
+RUN if [ -z "$NUM_JOBS" ]; then NUM_JOBS=$(nproc); fi && \
+    /src/docker/scripts/builder.sh -c gcc -m "-j${NUM_JOBS} gnb" \
+      -DBUILD_TESTING=False -DENABLE_ZEROMQ=On -DENABLE_UHD=Off -DENABLE_DPDK=Off -DENABLE_WERROR=Off \
+      -DMARCH=${MARCH} -DCMAKE_BUILD_TYPE=Release /src
+
+FROM ubuntu:${OS_VERSION}
+ENV DEBIAN_FRONTEND=noninteractive
+COPY docker/scripts/install_dependencies.sh /tmp/
+RUN /tmp/install_dependencies.sh run && rm -rf /var/lib/apt/lists/* /tmp/install_dependencies*
+COPY --from=builder /src/build/apps/gnb/gnb /usr/local/bin/gnb
+CMD ["gnb"]

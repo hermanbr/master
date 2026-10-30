@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_e1ap_common.a CMakeFiles/ocudu_e1ap_common.dir/e1ap_asn1_packer.cpp.o CMakeFiles/ocudu_e1ap_common.dir/e1ap_common_messages.cpp.o CMakeFiles/ocudu_e1ap_common.dir/log_helpers.cpp.o
+/usr/bin/ranlib libocudu_e1ap_common.a

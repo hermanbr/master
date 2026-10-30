@@ -1,0 +1,2 @@
+/usr/bin/ar qc libxnap_test_helpers.a CMakeFiles/xnap_test_helpers.dir/xnap_test_helpers.cpp.o CMakeFiles/xnap_test_helpers.dir/xnap_test_messages.cpp.o
+/usr/bin/ranlib libxnap_test_helpers.a

@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_uci_decoder.a CMakeFiles/ocudu_uci_decoder.dir/factories.cpp.o CMakeFiles/ocudu_uci_decoder.dir/uci_decoder_impl.cpp.o
+/usr/bin/ranlib libocudu_uci_decoder.a

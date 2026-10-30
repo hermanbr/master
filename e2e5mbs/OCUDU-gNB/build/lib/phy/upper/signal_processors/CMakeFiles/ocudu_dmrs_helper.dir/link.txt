@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_dmrs_helper.a CMakeFiles/ocudu_dmrs_helper.dir/dmrs_helper.cpp.o
+/usr/bin/ranlib libocudu_dmrs_helper.a

@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_ru_metrics_json_generators_helpers.a CMakeFiles/ocudu_ru_metrics_json_generators_helpers.dir/ofh.cpp.o
+/usr/bin/ranlib libocudu_ru_metrics_json_generators_helpers.a

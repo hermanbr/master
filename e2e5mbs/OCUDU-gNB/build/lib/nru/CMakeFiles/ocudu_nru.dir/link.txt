@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_nru.a CMakeFiles/ocudu_nru.dir/nru_packing.cpp.o
+/usr/bin/ranlib libocudu_nru.a

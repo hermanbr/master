@@ -1,0 +1,14 @@
+{
+  "mbsSession": {
+    "mbsSessionId": {
+      "tmgi": {
+        "mbsServiceId": "bad",
+        "plmnId": {
+          "mcc": "1",
+          "mnc": "bad"
+        }
+      }
+    },
+    "serviceType": "INVALID"
+  }
+}

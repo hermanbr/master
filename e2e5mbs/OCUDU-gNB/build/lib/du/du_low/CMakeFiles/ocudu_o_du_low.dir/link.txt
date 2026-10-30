@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_o_du_low.a CMakeFiles/ocudu_o_du_low.dir/du_low_executor_mapper.cpp.o CMakeFiles/ocudu_o_du_low.dir/du_low_factory.cpp.o CMakeFiles/ocudu_o_du_low.dir/du_low_impl.cpp.o CMakeFiles/ocudu_o_du_low.dir/du_low_metrics_collector_impl.cpp.o CMakeFiles/ocudu_o_du_low.dir/o_du_low_factory.cpp.o CMakeFiles/ocudu_o_du_low.dir/o_du_low_impl.cpp.o CMakeFiles/ocudu_o_du_low.dir/o_du_low_metrics_collector_impl.cpp.o
+/usr/bin/ranlib libocudu_o_du_low.a

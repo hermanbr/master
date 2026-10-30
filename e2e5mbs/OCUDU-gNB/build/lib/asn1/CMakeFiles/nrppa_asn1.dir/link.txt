@@ -1,0 +1,2 @@
+/usr/bin/ar qc libnrppa_asn1.a CMakeFiles/nrppa_asn1.dir/nrppa/common.cpp.o CMakeFiles/nrppa_asn1.dir/nrppa/nrppa_ies.cpp.o CMakeFiles/nrppa_asn1.dir/nrppa/nrppa_pdu_contents.cpp.o CMakeFiles/nrppa_asn1.dir/nrppa/nrppa.cpp.o
+/usr/bin/ranlib libnrppa_asn1.a

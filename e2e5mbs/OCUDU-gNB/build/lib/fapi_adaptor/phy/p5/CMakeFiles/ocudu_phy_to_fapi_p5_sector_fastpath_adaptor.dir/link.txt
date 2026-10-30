@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_phy_to_fapi_p5_sector_fastpath_adaptor.a CMakeFiles/ocudu_phy_to_fapi_p5_sector_fastpath_adaptor.dir/p5_requests_handler.cpp.o CMakeFiles/ocudu_phy_to_fapi_p5_sector_fastpath_adaptor.dir/phy_fapi_p5_sector_fastpath_adaptor_impl.cpp.o
+/usr/bin/ranlib libocudu_phy_to_fapi_p5_sector_fastpath_adaptor.a

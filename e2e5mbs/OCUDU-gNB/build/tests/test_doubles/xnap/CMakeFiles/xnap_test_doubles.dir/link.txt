@@ -1,0 +1,2 @@
+/usr/bin/ar qc libxnap_test_doubles.a CMakeFiles/xnap_test_doubles.dir/xnap_test_message_validators.cpp.o
+/usr/bin/ranlib libxnap_test_doubles.a

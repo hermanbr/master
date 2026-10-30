@@ -1,0 +1,161 @@
+# SPDX-FileCopyrightText: Copyright (C) 2021-2026 Software Radio Systems Limited
+# SPDX-License-Identifier: BSD-3-Clause-Open-MPI
+
+
+# Build args
+################
+# OS                    Base image (Docker Hub name), e.g. ubuntu or debian
+# OS_VERSION            Image tag, e.g. 24.04 or bookworm (must match OS)
+# UHD_VERSION           UHD version number
+# DPDK_VERSION          DPDK version number
+# MARCH                 gcc/clang compatible arch
+# NUM_JOBS              Number or empty for all
+# EXTRA_CMAKE_ARGS      Extra flags for OCUDU
+
+ARG OS=ubuntu
+ARG OS_VERSION=24.04
+ARG UHD_VERSION=4.7.0.0
+ARG DPDK_VERSION=24.11.2
+ARG MARCH=native
+ARG NUM_JOBS=""
+ARG TARGETARCH
+
+##################
+# Stage 1: Build #
+##################
+
+FROM ${OS}:${OS_VERSION} AS builder-base
+
+# Adding the complete repo to the context, in /src folder
+ADD . /src
+# An alternative could be to download the repo
+# RUN apt update && apt-get install -y --no-install-recommends git ca-certificates
+# RUN git clone https://github.com/ocudu/OCUDU_Project.git /src
+
+# Install OCUDU build dependencies
+RUN /src/docker/scripts/install_dependencies.sh build && \
+    /src/docker/scripts/install_uhd_dependencies.sh build && \
+    /src/docker/scripts/install_dpdk_dependencies.sh build
+
+
+
+FROM builder-base AS builder-rohc
+
+ARG MARCH
+ARG NUM_JOBS
+
+RUN /src/docker/scripts/install_rohc_dependencies.sh build
+
+# Compile ROHC
+RUN /src/docker/scripts/build_rohc.sh ${MARCH} ${NUM_JOBS}
+
+
+
+FROM builder-base AS builder
+
+ARG UHD_VERSION
+ARG DPDK_VERSION
+ARG MARCH
+ARG NUM_JOBS
+ARG TARGETARCH
+
+# Copy ROHC binaries and libraries installed in builder-rohc stage (without taking ROHC build deps that confuse DPDK build)
+COPY --from=builder-rohc /opt/rohc /opt/rohc
+
+# Compile UHD/DPDK
+RUN UHD_ARCH=$([ "${TARGETARCH}" = "arm64" ] && echo "-mcpu=${MARCH}" || echo "-march=${MARCH}") && \
+    DPDK_PLATFORM=$(case "${MARCH}" in *neoverse-n1*) echo n1sdp ;; *) echo "${MARCH}" ;; esac) && \
+    DPDK_ARCH=$([ "${TARGETARCH}" = "arm64" ] && echo "-Dplatform=${DPDK_PLATFORM} -Dmax_numa_nodes=1" || echo "-Dcpu_instruction_set=${MARCH}") && \
+    /src/docker/scripts/build_uhd.sh "${UHD_VERSION}" ${UHD_ARCH} ${NUM_JOBS} && \
+    /src/docker/scripts/build_dpdk.sh "${DPDK_VERSION}" "${DPDK_ARCH}" ${NUM_JOBS}
+
+# Compile OCUDU and install it in the OS
+ARG COMPILER=gcc
+ARG EXTRA_CMAKE_ARGS=""
+ENV ROHC_DIR=/opt/rohc
+ENV UHD_DIR=/opt/uhd/${UHD_VERSION}
+ENV DPDK_DIR=/opt/dpdk/${DPDK_VERSION}
+RUN if [ -z "$NUM_JOBS" ]; then NUM_JOBS=$(nproc); fi \
+    && ARCH_FLAG=$([ "${TARGETARCH}" = "arm64" ] && echo "-DMCPU=${MARCH}" || echo "-DMARCH=${MARCH}") \
+    && \
+    /src/docker/scripts/builder.sh -c ${COMPILER} -m "-j${NUM_JOBS} ocu odu odu_split_8 odu_split_7_2 gnb gnb_split_8 gnb_split_7_2 ru_emulator" \
+    -DBUILD_TESTING=False -DENABLE_UHD=On -DENABLE_DPDK=On ${ARCH_FLAG} -DCMAKE_INSTALL_PREFIX=/opt/ocudu \
+    ${EXTRA_CMAKE_ARGS} /src
+RUN cp /src/build/apps/cu/ocu                     /tmp/ocu                     && \
+    cp /src/build/apps/du/odu                     /tmp/odu                     && \
+    cp /src/build/apps/du_split_8/odu             /tmp/odu_split_8             && \
+    cp /src/build/apps/du_split_7_2/odu           /tmp/odu_split_7_2           && \
+    cp /src/build/apps/gnb/gnb                    /tmp/gnb                     && \
+    cp /src/build/apps/gnb_split_8/gnb            /tmp/gnb_split_8             && \
+    cp /src/build/apps/gnb_split_7_2/gnb          /tmp/gnb_split_7_2           && \
+    cp /src/build/apps/examples/ofh/ru_emulator   /tmp/ru_emulator             && \
+    cd /src/build                                                              && \
+    make install                                                               && \
+    mv /tmp/ocu                                   /opt/ocudu/bin/ocu           && \
+    mv /tmp/odu                                   /opt/ocudu/bin/odu           && \
+    mv /tmp/odu_split_8                           /opt/ocudu/bin/odu_split_8   && \
+    mv /tmp/odu_split_7_2                         /opt/ocudu/bin/odu_split_7_2 && \
+    mv /tmp/gnb                                   /opt/ocudu/bin/gnb           && \
+    mv /tmp/gnb_split_8                           /opt/ocudu/bin/gnb_split_8   && \
+    mv /tmp/gnb_split_7_2                         /opt/ocudu/bin/gnb_split_7_2 && \
+    mv /tmp/ru_emulator                           /opt/ocudu/bin/ru_emulator   && \
+    rm -rf /src
+
+################
+# Stage 2: Run #
+################
+
+FROM ${OS}:${OS_VERSION} AS runtime
+
+ARG UHD_VERSION
+ARG DPDK_VERSION
+
+# Copy OCUDU binaries and libraries installed in previous stage(s)
+COPY --from=builder /opt/rohc                 /opt/rohc
+COPY --from=builder /opt/uhd/${UHD_VERSION}   /opt/uhd/${UHD_VERSION}
+COPY --from=builder /opt/dpdk/${DPDK_VERSION} /opt/dpdk/${DPDK_VERSION}
+COPY --from=builder /opt/ocudu                /usr/local
+
+# Copy the install dependencies scripts (top-level dispatchers and per-OS implementations)
+ADD docker/scripts/install_*.sh /usr/local/etc/
+RUN chmod +x /usr/local/etc/install_*.sh && \
+    ln -sf /usr/local/etc/install_dependencies.sh /usr/local/etc/install_ocudu_dependencies.sh
+ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/rohc/lib/
+ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/uhd/${UHD_VERSION}/lib/:/opt/uhd/${UHD_VERSION}/lib/x86_64-linux-gnu/:/opt/uhd/${UHD_VERSION}/lib/aarch64-linux-gnu/
+ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/dpdk/${DPDK_VERSION}/lib/:/opt/dpdk/${DPDK_VERSION}/lib/x86_64-linux-gnu/:/opt/dpdk/${DPDK_VERSION}/lib/aarch64-linux-gnu/
+ENV PATH=$PATH:/opt/uhd/${UHD_VERSION}/bin/:/opt/dpdk/${DPDK_VERSION}/bin/
+
+# Install ocudu and lib runtime dependencies (curl / NTP helpers: install_docker_dependencies.sh)
+RUN /usr/local/etc/install_ocudu_dependencies.sh run && \
+    /usr/local/etc/install_rohc_dependencies.sh run && \
+    /usr/local/etc/install_uhd_dependencies.sh run && \
+    /usr/local/etc/install_dpdk_dependencies.sh run && \
+    /usr/local/etc/install_docker_dependencies.sh
+
+# Register DPDK/UHD/ROHC library paths system-wide.
+# When the gnb binary has file capabilities (see next RUN), ld.so enters
+# secure-execution mode on execve() and STRIPS LD_LIBRARY_PATH. The runtime
+# libs must therefore be findable via /etc/ld.so.cache instead.
+RUN printf '%s\n' \
+      "/opt/rohc/lib" \
+      "/opt/uhd/${UHD_VERSION}/lib" \
+      "/opt/uhd/${UHD_VERSION}/lib/x86_64-linux-gnu" \
+      "/opt/uhd/${UHD_VERSION}/lib/aarch64-linux-gnu" \
+      "/opt/dpdk/${DPDK_VERSION}/lib" \
+      "/opt/dpdk/${DPDK_VERSION}/lib/x86_64-linux-gnu" \
+      "/opt/dpdk/${DPDK_VERSION}/lib/aarch64-linux-gnu" \
+      > /etc/ld.so.conf.d/ocudu.conf && \
+    ldconfig
+
+# Bake minimum-privilege Linux capabilities into the binaries that need to
+# run as a non-root uid in Kubernetes. Kubernetes' capabilities.add only
+# populates the bounding set for non-root processes; for caps to land in
+# the effective set after execve(), they must be declared as file caps.
+#
+# Caps (same minimum set for both binaries, empirically verified against
+# live OFH traffic):
+#   cap_sys_nice  - SCHED_FIFO on ru_timing / tx-rx threads (DPDK real-time)
+#   cap_ipc_lock  - mlock() on DPDK hugepages
+RUN setcap cap_sys_nice,cap_ipc_lock+ep /usr/local/bin/gnb && \
+    setcap cap_sys_nice,cap_ipc_lock+ep /usr/local/bin/ru_emulator && \
+    getcap /usr/local/bin/gnb /usr/local/bin/ru_emulator

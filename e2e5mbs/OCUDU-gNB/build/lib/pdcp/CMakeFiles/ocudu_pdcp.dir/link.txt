@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_pdcp.a CMakeFiles/ocudu_pdcp.dir/pdcp_factory.cpp.o CMakeFiles/ocudu_pdcp.dir/pdcp_entity_tx.cpp.o CMakeFiles/ocudu_pdcp.dir/pdcp_entity_rx.cpp.o CMakeFiles/ocudu_pdcp.dir/pdcp_tx_window.cpp.o CMakeFiles/ocudu_pdcp.dir/pdcp_pdu.cpp.o CMakeFiles/ocudu_pdcp.dir/pdcp_metrics_aggregator.cpp.o
+/usr/bin/ranlib libocudu_pdcp.a

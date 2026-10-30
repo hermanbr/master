@@ -1,0 +1,104 @@
+# Virtual MBS testbed: OCUDU gNB + N x OAI nrUE over ZMQ, joined by a ZMQ broker.
+#
+#   OCUDU gNB .16 --DL :2000--> zmq_broker .30 --DL :2100,:2101--> oai_nrue_1 .31, oai_nrue_2 .32
+#                 <--UL :2001--               <--UL ue:2001------
+#
+# Usage (from 5G-MAG-Core/):
+#   docker compose --env-file=.env \
+#     -f compose-files/internal/docker-compose.yaml \
+#     -f compose-files/internal/docker-compose.ocudu-gnb.yaml \
+#     -f compose-files/internal/docker-compose.virtual-mbs.yaml up -d
+#
+# To add a UE: copy an oai_nrue_N block (new IP, IMSI conf, MBS UDP port, broker port 210N)
+# and add a matching "--ue-dl-bind"/"--ue-tx" pair to zmq_broker.
+#
+# The cell (band 78, ARFCN 632628, 30 kHz, 20 MHz, 23.04 Msps) and UE options follow
+# oai-ue/ci-scripts/yaml_files/5g_zmq_radio_1x1_ocudu.
+
+x-oai-nrue: &oai-nrue
+  image: ${OAI_NRUE_IMAGE:-oai-nr-ue:mbs-local}
+  cap_drop:
+    - ALL
+  cap_add:
+    - NET_ADMIN
+    - NET_RAW
+    - SYS_NICE
+  devices:
+    - /dev/net/tun:/dev/net/tun
+  depends_on:
+    - zmq_broker
+    - ocudu_gnb_with_mbs
+
+services:
+  ocudu_gnb_with_mbs:
+    build:
+      # Lean build: only the gnb app with ZMQ (no DPDK/UHD/CU-DU splits).
+      dockerfile: docker/Dockerfile.gnb.zmq
+      args:
+        NUM_JOBS: ${OCUDU_GNB_NUM_JOBS:-}
+    cpuset: ${OCUDU_GNB_CPUSET:-2-7}
+    volumes:
+      # Host bind instead of the named volume so docs/activate-*.sh can read the gNB log.
+      - ../../../logs/ocudu-gnb:/tmp
+
+  zmq_broker:
+    container_name: zmq_broker
+    image: e2e5gmbs/zmq-broker:local
+    build:
+      context: ../../../tools/zmq-broker
+    command:
+      - --gnb-tx=tcp://${OCUDU_GNB_IP:-10.33.33.16}:2000
+      - --gnb-rx-bind=tcp://*:2001
+      - --ue-dl-bind=tcp://*:2100
+      - --ue-tx=tcp://10.33.33.31:2001
+      - --ue-dl-bind=tcp://*:2101
+      - --ue-tx=tcp://10.33.33.32:2001
+    networks:
+      5g-mag:
+        ipv4_address: 10.33.33.30
+        aliases:
+          - zmq-broker.5g-mag.org
+
+  oai_nrue_1:
+    <<: *oai-nrue
+    container_name: oai_nrue_1
+    environment:
+      OAI_NRUE_MBS_G_RNTI: "0xfe01"
+      OAI_NRUE_MBS_UDP: 10.33.33.1:5001
+      USE_ADDITIONAL_OPTIONS: >-
+        -r 51 --numerology 1 --band 78 -C 3489420000 --ssb 0 -E
+        --uecap_file /opt/oai-nr-ue/etc/uecap.xml
+        --log_config.global_log_options level,nocolor,time
+        --device.name oai_zmqdevif
+        --zmq.[0].tx_channels tcp://0.0.0.0:2001
+        --zmq.[0].rx_channels tcp://10.33.33.30:2100
+    volumes:
+      - ../../configs/internal/oai_nrue_1.conf:/opt/oai-nr-ue/etc/nr-ue.conf:ro
+      - ../../../oai-ue/targets/PROJECTS/GENERIC-NR-5GC/CONF/uecap_ports1.xml:/opt/oai-nr-ue/etc/uecap.xml:ro
+    networks:
+      5g-mag:
+        ipv4_address: 10.33.33.31
+        aliases:
+          - oai-nrue-1.5g-mag.org
+
+  oai_nrue_2:
+    <<: *oai-nrue
+    container_name: oai_nrue_2
+    environment:
+      OAI_NRUE_MBS_G_RNTI: "0xfe01"
+      OAI_NRUE_MBS_UDP: 10.33.33.1:5002
+      USE_ADDITIONAL_OPTIONS: >-
+        -r 51 --numerology 1 --band 78 -C 3489420000 --ssb 0 -E
+        --uecap_file /opt/oai-nr-ue/etc/uecap.xml
+        --log_config.global_log_options level,nocolor,time
+        --device.name oai_zmqdevif
+        --zmq.[0].tx_channels tcp://0.0.0.0:2001
+        --zmq.[0].rx_channels tcp://10.33.33.30:2101
+    volumes:
+      - ../../configs/internal/oai_nrue_2.conf:/opt/oai-nr-ue/etc/nr-ue.conf:ro
+      - ../../../oai-ue/targets/PROJECTS/GENERIC-NR-5GC/CONF/uecap_ports1.xml:/opt/oai-nr-ue/etc/uecap.xml:ro
+    networks:
+      5g-mag:
+        ipv4_address: 10.33.33.32
+        aliases:
+          - oai-nrue-2.5g-mag.org

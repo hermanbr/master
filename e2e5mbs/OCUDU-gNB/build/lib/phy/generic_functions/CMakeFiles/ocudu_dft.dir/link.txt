@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_dft.a CMakeFiles/ocudu_dft.dir/dft_processor_generic_impl.cpp.o CMakeFiles/ocudu_dft.dir/generic_functions_factories.cpp.o CMakeFiles/ocudu_dft.dir/dft_processor_fftw_impl.cpp.o CMakeFiles/ocudu_dft.dir/dft_processor_ci16_avx2.cpp.o
+/usr/bin/ranlib libocudu_dft.a

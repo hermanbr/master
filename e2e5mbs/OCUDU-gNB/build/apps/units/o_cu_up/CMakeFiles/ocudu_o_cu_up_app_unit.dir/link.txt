@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_o_cu_up_app_unit.a CMakeFiles/ocudu_o_cu_up_app_unit.dir/o_cu_up_application_unit_impl.cpp.o CMakeFiles/ocudu_o_cu_up_app_unit.dir/o_cu_up_builder.cpp.o CMakeFiles/ocudu_o_cu_up_app_unit.dir/o_cu_up_unit_impl.cpp.o
+/usr/bin/ranlib libocudu_o_cu_up_app_unit.a

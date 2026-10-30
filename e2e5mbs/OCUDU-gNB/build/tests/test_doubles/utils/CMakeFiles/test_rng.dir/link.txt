@@ -1,0 +1,2 @@
+/usr/bin/ar qc libtest_rng.a CMakeFiles/test_rng.dir/test_rng.cpp.o
+/usr/bin/ranlib libtest_rng.a

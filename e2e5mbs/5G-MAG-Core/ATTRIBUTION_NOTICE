@@ -1,0 +1,43 @@
+5G-MAG RT MBS Docker images uses the following open source software:
+
+- open5gs - Opensource 5G Core implementation
+  available from https://github.com/open5gs/open5gs
+  Licensed under GNU AGPL v3.0 (https://www.gnu.org/licenses/agpl-3.0.html)
+
+- srsRAN_Project - Opensource 5G RAN implementation
+  available from https://github.com/srsran/srsRAN_Project
+  Licensed under GNU AGPL v3.0 (https://www.gnu.org/licenses/agpl-3.0.html)
+
+- srsRAN_4G - Opensource 5G UE implementation
+  available from https://github.com/srsran/srsRAN_4G
+  Licensed under GNU AGPL v3.0 (https://www.gnu.org/licenses/agpl-3.0.html)
+
+- smcroute - Static multicast routing daemon
+  available from https://github.com/troglobit/smcroute
+  Licensed under GNU GPL v2.0 (https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
+
+- sendip - Tool to send completely arbitrary IP packets out over the network
+  available from https://github.com/rickettm/SendIP
+  Licensed under GNU GPL v2.0 (https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
+
+- yq - Portable command-line YAML, JSON, XML, CSV, TOML and properties processor
+  available from https://github.com/mikefarah/yq
+  Licensed under MIT license (https://mit-license.org/)
+
+5G-MAG RT MBS test framework uses the following open source software:
+
+- httpcore - low-level HTTP client
+  available from https://pypi.org/project/httpcore/
+  Licensed under BSD license (https://github.com/encode/httpcore/blob/master/LICENSE.md)
+
+- h2 - HTTP/2 State-Machine based protocol implementation
+  available from https://pypi.org/project/h2/
+  Licensed under MIT license (https://mit-license.org/)
+
+- jsonschema - implementation of the JSON Schema specification for Python
+  available from https://pypi.org/project/jsonschema/
+  Licensed under MIT license (https://mit-license.org/)
+
+- urllib3 - user-friendly HTTP client for Python
+  available from https://pypi.org/project/urllib3/
+  Licensed under MIT license (https://mit-license.org/)

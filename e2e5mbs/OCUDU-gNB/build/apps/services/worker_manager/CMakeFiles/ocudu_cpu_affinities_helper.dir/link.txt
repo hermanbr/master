@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_cpu_affinities_helper.a CMakeFiles/ocudu_cpu_affinities_helper.dir/cli11_cpu_affinities_parser_helper.cpp.o
+/usr/bin/ranlib libocudu_cpu_affinities_helper.a

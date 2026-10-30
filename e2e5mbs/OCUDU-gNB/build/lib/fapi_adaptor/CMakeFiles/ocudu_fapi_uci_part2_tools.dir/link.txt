@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_fapi_uci_part2_tools.a CMakeFiles/ocudu_fapi_uci_part2_tools.dir/uci_part2_correspondence_generator.cpp.o CMakeFiles/ocudu_fapi_uci_part2_tools.dir/uci_part2_correspondence_mapper.cpp.o CMakeFiles/ocudu_fapi_uci_part2_tools.dir/uci_part2_correspondence_repository.cpp.o
+/usr/bin/ranlib libocudu_fapi_uci_part2_tools.a

@@ -1,0 +1,4 @@
+# Directory labels
+ e2ap
+# Source files and their labels
+/home/raj/chatgpt/sdr-mbs/ocudu/tests/unittests/e2/common/e2ap_asn1_packer.cpp

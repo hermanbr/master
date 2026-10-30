@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_flexible_o_du_split_6.a CMakeFiles/ocudu_flexible_o_du_split_6.dir/slot_point_extender_adaptor.cpp.o CMakeFiles/ocudu_flexible_o_du_split_6.dir/split6_o_du_application_unit_impl.cpp.o CMakeFiles/ocudu_flexible_o_du_split_6.dir/split6_o_du_factory.cpp.o CMakeFiles/ocudu_flexible_o_du_split_6.dir/split6_o_du_impl.cpp.o CMakeFiles/ocudu_flexible_o_du_split_6.dir/split6_o_du_unit_cli11_schema.cpp.o CMakeFiles/ocudu_flexible_o_du_split_6.dir/split6_o_du_unit_config_validator.cpp.o
+/usr/bin/ranlib libocudu_flexible_o_du_split_6.a

@@ -1,0 +1,6 @@
+# Directory labels
+ cu_cp
+# Source files and their labels
+/home/raj/chatgpt/sdr-mbs/ocudu/tests/unittests/cu_cp/mobility/mobility_test_helpers.cpp
+/home/raj/chatgpt/sdr-mbs/ocudu/tests/unittests/cu_cp/du_processor_test_messages.cpp
+/home/raj/chatgpt/sdr-mbs/ocudu/tests/unittests/cu_cp/test_helpers.cpp

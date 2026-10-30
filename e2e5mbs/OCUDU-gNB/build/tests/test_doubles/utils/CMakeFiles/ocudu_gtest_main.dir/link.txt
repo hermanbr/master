@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_gtest_main.a CMakeFiles/ocudu_gtest_main.dir/ocudu_gtest_main.cpp.o
+/usr/bin/ranlib libocudu_gtest_main.a

@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_pxsch_bler_test_helpers.a CMakeFiles/ocudu_pxsch_bler_test_helpers.dir/pxsch_bler_test_channel_emulator.cpp.o CMakeFiles/ocudu_pxsch_bler_test_helpers.dir/pxsch_bler_test_factories.cpp.o
+/usr/bin/ranlib libocudu_pxsch_bler_test_helpers.a

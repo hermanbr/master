@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_split6_o_du_low_plugin.a CMakeFiles/ocudu_split6_o_du_low_plugin.dir/split6_o_du_low_plugin_dummy.cpp.o
+/usr/bin/ranlib libocudu_split6_o_du_low_plugin.a

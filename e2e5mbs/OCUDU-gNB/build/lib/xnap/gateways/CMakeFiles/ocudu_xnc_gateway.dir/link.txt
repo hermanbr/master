@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_xnc_gateway.a CMakeFiles/ocudu_xnc_gateway.dir/xnc_network_gateway_factory.cpp.o
+/usr/bin/ranlib libocudu_xnc_gateway.a

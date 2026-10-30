@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_channel_estimator.a CMakeFiles/ocudu_channel_estimator.dir/channel_estimator/factories.cpp.o CMakeFiles/ocudu_channel_estimator.dir/channel_estimator/port_channel_estimator_average_impl.cpp.o CMakeFiles/ocudu_channel_estimator.dir/channel_estimator/port_channel_estimator_helpers.cpp.o
+/usr/bin/ranlib libocudu_channel_estimator.a

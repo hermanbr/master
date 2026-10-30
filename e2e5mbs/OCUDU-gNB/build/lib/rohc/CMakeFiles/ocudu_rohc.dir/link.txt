@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_rohc.a CMakeFiles/ocudu_rohc.dir/rohc_factory.cpp.o CMakeFiles/ocudu_rohc.dir/rohc_support.cpp.o
+/usr/bin/ranlib libocudu_rohc.a

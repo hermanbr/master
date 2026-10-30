@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_uplink_processor.a CMakeFiles/ocudu_uplink_processor.dir/uplink_processor_impl.cpp.o CMakeFiles/ocudu_uplink_processor.dir/uplink_processor_pool_impl.cpp.o CMakeFiles/ocudu_uplink_processor.dir/uplink_request_processor_impl.cpp.o
+/usr/bin/ranlib libocudu_uplink_processor.a

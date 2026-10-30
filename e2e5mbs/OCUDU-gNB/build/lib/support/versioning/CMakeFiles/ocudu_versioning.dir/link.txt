@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_versioning.a CMakeFiles/ocudu_versioning.dir/build_info.cpp.o CMakeFiles/ocudu_versioning.dir/version.cpp.o
+/usr/bin/ranlib libocudu_versioning.a

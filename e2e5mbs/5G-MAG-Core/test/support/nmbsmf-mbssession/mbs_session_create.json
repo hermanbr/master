@@ -1,0 +1,14 @@
+{
+  "mbsSession": {
+    "mbsSessionId": {
+      "tmgi": {
+        "mbsServiceId": "000000",
+        "plmnId": {
+          "mcc": "001",
+          "mnc": "01"
+        }
+      }
+    },
+    "serviceType": "BROADCAST"
+  }
+}

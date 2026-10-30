@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_network_app_helpers.a CMakeFiles/ocudu_network_app_helpers.dir/sctp_cli11_schema.cpp.o CMakeFiles/ocudu_network_app_helpers.dir/sctp_config_yaml_writer.cpp.o CMakeFiles/ocudu_network_app_helpers.dir/udp_cli11_schema.cpp.o CMakeFiles/ocudu_network_app_helpers.dir/udp_config_yaml_writer.cpp.o
+/usr/bin/ranlib libocudu_network_app_helpers.a

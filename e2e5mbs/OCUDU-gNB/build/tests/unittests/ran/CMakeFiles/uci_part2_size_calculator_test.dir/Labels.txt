@@ -1,0 +1,4 @@
+# Directory labels
+ ran
+# Source files and their labels
+/home/raj/chatgpt/sdr-mbs/ocudu/tests/unittests/ran/uci/uci_part2_size_calculator_test.cpp

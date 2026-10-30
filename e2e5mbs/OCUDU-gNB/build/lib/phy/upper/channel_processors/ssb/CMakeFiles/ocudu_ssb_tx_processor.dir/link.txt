@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_ssb_tx_processor.a CMakeFiles/ocudu_ssb_tx_processor.dir/factories.cpp.o CMakeFiles/ocudu_ssb_tx_processor.dir/pbch_encoder_impl.cpp.o CMakeFiles/ocudu_ssb_tx_processor.dir/pbch_modulator_impl.cpp.o CMakeFiles/ocudu_ssb_tx_processor.dir/ssb_processor_impl.cpp.o
+/usr/bin/ranlib libocudu_ssb_tx_processor.a

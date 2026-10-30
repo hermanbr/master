@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_transform_precoding.a CMakeFiles/ocudu_transform_precoding.dir/transform_precoder_dft_impl.cpp.o CMakeFiles/ocudu_transform_precoding.dir/transform_precoding_factories.cpp.o
+/usr/bin/ranlib libocudu_transform_precoding.a

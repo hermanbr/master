@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_o_du.a CMakeFiles/ocudu_o_du.dir/o_du_impl.cpp.o CMakeFiles/ocudu_o_du.dir/o_du_factory.cpp.o
+/usr/bin/ranlib libocudu_o_du.a

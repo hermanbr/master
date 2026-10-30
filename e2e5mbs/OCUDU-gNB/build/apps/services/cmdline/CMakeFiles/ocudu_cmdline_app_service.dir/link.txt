@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_cmdline_app_service.a CMakeFiles/ocudu_cmdline_app_service.dir/cmdline_command_dispatcher.cpp.o CMakeFiles/ocudu_cmdline_app_service.dir/stdout_metrics_command.cpp.o
+/usr/bin/ranlib libocudu_cmdline_app_service.a

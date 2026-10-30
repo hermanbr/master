@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_dmrs_pusch.a CMakeFiles/ocudu_dmrs_pusch.dir/pusch/factories.cpp.o CMakeFiles/ocudu_dmrs_pusch.dir/pusch/dmrs_pusch_estimator_impl.cpp.o
+/usr/bin/ranlib libocudu_dmrs_pusch.a

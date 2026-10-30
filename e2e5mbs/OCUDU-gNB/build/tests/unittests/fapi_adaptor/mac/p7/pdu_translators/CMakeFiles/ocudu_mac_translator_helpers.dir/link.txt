@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_mac_translator_helpers.a CMakeFiles/ocudu_mac_translator_helpers.dir/helpers.cpp.o
+/usr/bin/ranlib libocudu_mac_translator_helpers.a

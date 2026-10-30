@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_cu_cp_metrics_json_generators_helpers.a CMakeFiles/ocudu_cu_cp_metrics_json_generators_helpers.dir/cu_cp_json_helper.cpp.o
+/usr/bin/ranlib libocudu_cu_cp_metrics_json_generators_helpers.a

@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_pucch_detector.a CMakeFiles/ocudu_pucch_detector.dir/factories.cpp.o CMakeFiles/ocudu_pucch_detector.dir/pucch_detector_format0.cpp.o CMakeFiles/ocudu_pucch_detector.dir/pucch_detector_format1.cpp.o
+/usr/bin/ranlib libocudu_pucch_detector.a

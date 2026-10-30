@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_ofh.a CMakeFiles/ocudu_ofh.dir/ofh_factories.cpp.o CMakeFiles/ocudu_ofh.dir/ofh_metrics_collector_impl.cpp.o CMakeFiles/ocudu_ofh.dir/ofh_sector_impl.cpp.o CMakeFiles/ocudu_ofh.dir/ofh_sector_controller.cpp.o
+/usr/bin/ranlib libocudu_ofh.a

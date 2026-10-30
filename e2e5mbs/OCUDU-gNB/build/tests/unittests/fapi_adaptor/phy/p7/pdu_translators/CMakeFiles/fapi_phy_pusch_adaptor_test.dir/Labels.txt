@@ -1,0 +1,4 @@
+# Directory labels
+ fapi_adaptor
+# Source files and their labels
+/home/raj/chatgpt/sdr-mbs/ocudu/tests/unittests/fapi_adaptor/phy/p7/pdu_translators/ul_pusch_pdu_test.cpp

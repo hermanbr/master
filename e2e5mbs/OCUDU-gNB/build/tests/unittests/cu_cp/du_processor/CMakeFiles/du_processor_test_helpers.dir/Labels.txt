@@ -1,0 +1,4 @@
+# Directory labels
+ cu_cp
+# Source files and their labels
+/home/raj/chatgpt/sdr-mbs/ocudu/tests/unittests/cu_cp/du_processor/du_processor_test_helpers.cpp

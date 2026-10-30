@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudulog.a CMakeFiles/ocudulog.dir/backend_worker.cpp.o CMakeFiles/ocudulog.dir/ocudulog.cpp.o CMakeFiles/ocudulog.dir/ocudulog_c.cpp.o CMakeFiles/ocudulog.dir/event_trace.cpp.o CMakeFiles/ocudulog.dir/formatters/json_formatter.cpp.o CMakeFiles/ocudulog.dir/formatters/text_formatter.cpp.o
+/usr/bin/ranlib libocudulog.a

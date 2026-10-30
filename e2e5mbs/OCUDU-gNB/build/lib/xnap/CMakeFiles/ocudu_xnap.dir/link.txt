@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_xnap.a CMakeFiles/ocudu_xnap.dir/log_helpers.cpp.o CMakeFiles/ocudu_xnap.dir/procedures/xnap_source_handover_preparation_procedure.cpp.o CMakeFiles/ocudu_xnap.dir/procedures/xnap_target_handover_preparation_procedure.cpp.o CMakeFiles/ocudu_xnap.dir/procedures/xn_setup_procedure.cpp.o CMakeFiles/ocudu_xnap.dir/procedures/xnap_sn_status_transfer_procedure.cpp.o CMakeFiles/ocudu_xnap.dir/xnap_asn1_utils.cpp.o CMakeFiles/ocudu_xnap.dir/xnap_factory.cpp.o CMakeFiles/ocudu_xnap.dir/xnap_impl.cpp.o
+/usr/bin/ranlib libocudu_xnap.a

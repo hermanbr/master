@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_fapi_message_builder_test_helpers.a CMakeFiles/ocudu_fapi_message_builder_test_helpers.dir/message_builder_helpers.cpp.o
+/usr/bin/ranlib libocudu_fapi_message_builder_test_helpers.a

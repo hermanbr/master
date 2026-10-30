@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_cbs_encoder.a CMakeFiles/ocudu_cbs_encoder.dir/cbs_encoder_impl.cpp.o
+/usr/bin/ranlib libocudu_cbs_encoder.a

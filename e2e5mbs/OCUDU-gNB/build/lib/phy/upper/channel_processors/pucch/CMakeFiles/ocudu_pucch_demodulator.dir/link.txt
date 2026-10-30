@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_pucch_demodulator.a CMakeFiles/ocudu_pucch_demodulator.dir/factories.cpp.o CMakeFiles/ocudu_pucch_demodulator.dir/pucch_demodulator_format2.cpp.o CMakeFiles/ocudu_pucch_demodulator.dir/pucch_demodulator_format3.cpp.o CMakeFiles/ocudu_pucch_demodulator.dir/pucch_demodulator_format4.cpp.o
+/usr/bin/ranlib libocudu_pucch_demodulator.a

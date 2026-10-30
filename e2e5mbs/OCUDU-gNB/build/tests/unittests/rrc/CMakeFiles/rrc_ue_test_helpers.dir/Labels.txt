@@ -1,0 +1,4 @@
+# Directory labels
+ rrc
+# Source files and their labels
+/home/raj/chatgpt/sdr-mbs/ocudu/tests/unittests/rrc/rrc_ue_test_messages.cpp

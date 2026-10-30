@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_radio.a CMakeFiles/ocudu_radio.dir/plugin_radio_factory.cpp.o CMakeFiles/ocudu_radio.dir/radio_factory.cpp.o
+/usr/bin/ranlib libocudu_radio.a

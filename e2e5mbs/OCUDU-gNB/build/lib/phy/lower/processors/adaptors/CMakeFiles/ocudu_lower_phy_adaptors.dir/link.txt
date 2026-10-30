@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_lower_phy_adaptors.a CMakeFiles/ocudu_lower_phy_adaptors.dir/processor_handler_adaptor.cpp.o CMakeFiles/ocudu_lower_phy_adaptors.dir/processor_notifier_adaptor.cpp.o
+/usr/bin/ranlib libocudu_lower_phy_adaptors.a

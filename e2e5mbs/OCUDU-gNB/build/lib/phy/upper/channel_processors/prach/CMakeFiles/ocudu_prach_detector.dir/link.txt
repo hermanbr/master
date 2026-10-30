@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_prach_detector.a CMakeFiles/ocudu_prach_detector.dir/prach_detector_generic_impl.cpp.o CMakeFiles/ocudu_prach_detector.dir/prach_detector_generic_thresholds.cpp.o CMakeFiles/ocudu_prach_detector.dir/prach_generator_impl.cpp.o CMakeFiles/ocudu_prach_detector.dir/prach_detector_phy_validator_impl.cpp.o CMakeFiles/ocudu_prach_detector.dir/factories.cpp.o
+/usr/bin/ranlib libocudu_prach_detector.a

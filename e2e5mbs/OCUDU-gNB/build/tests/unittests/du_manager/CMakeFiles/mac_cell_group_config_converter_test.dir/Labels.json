@@ -1,0 +1,17 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/raj/chatgpt/sdr-mbs/ocudu/tests/unittests/du_manager/mac_cell_group_config_converter_test.cpp"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"du_manager",
+			"du_high"
+		],
+		"name" : "mac_cell_group_config_converter_test"
+	}
+}

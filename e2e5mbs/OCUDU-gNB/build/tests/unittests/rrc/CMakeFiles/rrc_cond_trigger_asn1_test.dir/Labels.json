@@ -1,0 +1,16 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/raj/chatgpt/sdr-mbs/ocudu/tests/unittests/rrc/rrc_cond_trigger_asn1_test.cpp"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"rrc"
+		],
+		"name" : "rrc_cond_trigger_asn1_test"
+	}
+}

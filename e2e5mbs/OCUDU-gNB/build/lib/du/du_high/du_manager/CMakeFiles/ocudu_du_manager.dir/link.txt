@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_du_manager.a CMakeFiles/ocudu_du_manager.dir/du_cell_manager.cpp.o CMakeFiles/ocudu_du_manager.dir/du_manager_factory.cpp.o CMakeFiles/ocudu_du_manager.dir/du_manager_impl.cpp.o CMakeFiles/ocudu_du_manager.dir/du_positioning_handler_factory.cpp.o CMakeFiles/ocudu_du_manager.dir/metrics/du_metrics_aggregator_impl.cpp.o CMakeFiles/ocudu_du_manager.dir/du_positioning_manager_impl.cpp.o CMakeFiles/ocudu_du_manager.dir/du_manager_controller_impl.cpp.o
+/usr/bin/ranlib libocudu_du_manager.a

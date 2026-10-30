@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_logger_app_helpers.a CMakeFiles/ocudu_logger_app_helpers.dir/logger_appconfig_cli11_schema.cpp.o CMakeFiles/ocudu_logger_app_helpers.dir/logger_appconfig_validator.cpp.o CMakeFiles/ocudu_logger_app_helpers.dir/logger_appconfig_yaml_writer.cpp.o
+/usr/bin/ranlib libocudu_logger_app_helpers.a

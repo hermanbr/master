@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_flexible_o_du_unit_metrics_helpers.a CMakeFiles/ocudu_flexible_o_du_unit_metrics_helpers.dir/flexible_o_du_metrics_builder.cpp.o CMakeFiles/ocudu_flexible_o_du_unit_metrics_helpers.dir/flexible_o_du_metrics_consumers.cpp.o CMakeFiles/ocudu_flexible_o_du_unit_metrics_helpers.dir/flexible_o_du_metrics_producer.cpp.o
+/usr/bin/ranlib libocudu_flexible_o_du_unit_metrics_helpers.a

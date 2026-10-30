@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_f1u_mbs.a CMakeFiles/ocudu_f1u_mbs.dir/mbs/f1u_mbs_demux_session.cpp.o CMakeFiles/ocudu_f1u_mbs.dir/mbs/f1u_mbs_router.cpp.o CMakeFiles/ocudu_f1u_mbs.dir/mbs/mbs_ngu_receiver.cpp.o
+/usr/bin/ranlib libocudu_f1u_mbs.a

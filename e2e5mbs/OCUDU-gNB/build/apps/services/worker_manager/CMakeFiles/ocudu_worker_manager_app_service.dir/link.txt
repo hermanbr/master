@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_worker_manager_app_service.a CMakeFiles/ocudu_worker_manager_app_service.dir/worker_manager.cpp.o CMakeFiles/ocudu_worker_manager_app_service.dir/worker_manager_cli11_schema.cpp.o CMakeFiles/ocudu_worker_manager_app_service.dir/worker_manager_appconfig_validator.cpp.o
+/usr/bin/ranlib libocudu_worker_manager_app_service.a

@@ -1,0 +1,114 @@
+services:
+  gnb_with_mbs:
+    profiles:
+      - rt-srsran-reference
+
+  bsf:
+    networks:
+      5g-mag:
+        ipv4_address: ${BSF_IP:-10.33.33.21}
+        aliases:
+          - bsf.5g-mag.org
+
+  amf_with_mbs:
+    networks:
+      5g-mag:
+        ipv4_address: ${AMF_WITH_MBS_IP:-10.33.33.19}
+        aliases:
+          - amf-with-mbs.5g-mag.org
+
+  pcf:
+    networks:
+      5g-mag:
+        ipv4_address: ${PCF_IP:-10.33.33.20}
+        aliases:
+          - pcf.5g-mag.org
+
+  smf_mb-smf:
+    networks:
+      5g-mag:
+        ipv4_address: ${SMF_MB_SMF_IP:-10.33.33.18}
+        aliases:
+          - smf-mb-smf.5g-mag.org
+
+  upf_mb-upf:
+    networks:
+      5g-mag:
+        ipv4_address: ${UPF_MB_UPF_IP:-10.33.33.3}
+        aliases:
+          - upf-mb-upf.5g-mag.org
+
+  ocudu_gnb_with_mbs:
+    container_name: ocudu_gnb_with_mbs
+    image: ocudu/gnb:mbs-local
+    build:
+      context: ../../../OCUDU-gNB
+      dockerfile: docker/Dockerfile
+      args:
+        OS: ${OCUDU_GNB_OS:-ubuntu}
+        OS_VERSION: ${OCUDU_GNB_OS_VERSION:-24.04}
+        MARCH: ${OCUDU_GNB_MARCH:-native}
+        NUM_JOBS: ${OCUDU_GNB_NUM_JOBS:-2}
+        EXTRA_CMAKE_ARGS: ${OCUDU_GNB_EXTRA_CMAKE_ARGS:-}
+    privileged: true
+    stdin_open: true
+    tty: true
+    cpuset: "2-7"
+    shm_size: "1g"
+    ulimits:
+      rtprio: 99
+      memlock: -1
+      nice: -20
+    cap_add:
+      - NET_ADMIN
+      - SYS_NICE
+      - CAP_SYS_PTRACE
+    volumes:
+      - /dev/bus/usb/:/dev/bus/usb/
+      - /usr/share/uhd/images:/usr/share/uhd/images
+      - ocudu_gnb_mbs_storage:/tmp
+    configs:
+      - source: ocudu_gnb_mbs_config
+        target: /ocudu_gnb_mbs.yml
+    command: gnb -c /ocudu_gnb_mbs.yml
+    networks:
+      5g-mag:
+        ipv4_address: ${OCUDU_GNB_IP:-10.33.33.16}
+        aliases:
+          - ocudu-gnb-with-mbs.5g-mag.org
+          - gnb-with-mbs.5g-mag.org
+    depends_on:
+      - amf_with_mbs
+
+  ue_with_mbs:
+    profiles:
+      - docker-zmq-ue
+    restart: unless-stopped
+    entrypoint:
+      - /bin/bash
+      - /usr/local/bin/ue_pdu_watchdog.sh
+    environment:
+      - UE_FQDN=ue-with-mbs.5g-mag.org
+      - GNB_FQDN=gnb-with-mbs.5g-mag.org
+      - UE_IP=${UE_WITH_MBS_IP:-10.33.33.17}
+      - gNB_IP=${OCUDU_GNB_IP:-10.33.33.16}
+      - UE_PDU_TUN=${UE_PDU_TUN:-tun_srsue}
+      - UE_PDU_GATEWAY=${UE_PDU_GATEWAY:-10.45.0.1}
+      - UE_PDU_CHECK_INTERVAL=${UE_PDU_CHECK_INTERVAL:-30}
+      - UE_PDU_MAX_FAILURES=${UE_PDU_MAX_FAILURES:-3}
+    volumes:
+      - ../../scripts/ue_pdu_watchdog.sh:/usr/local/bin/ue_pdu_watchdog.sh:ro
+    networks:
+      5g-mag:
+        ipv4_address: ${UE_WITH_MBS_IP:-10.33.33.17}
+        aliases:
+          - ue-with-mbs.5g-mag.org
+    depends_on:
+      - ocudu_gnb_with_mbs
+
+volumes:
+  ocudu_gnb_mbs_storage:
+
+configs:
+  ocudu_gnb_mbs_config:
+    file: ${OCUDU_GNB_CONFIG_PATH:-../../configs/internal/ocudu_gnb_mbs_zmq.yml}

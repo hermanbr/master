@@ -1,0 +1,4 @@
+# Directory labels
+ fapi_adaptor
+# Source files and their labels
+/home/raj/chatgpt/sdr-mbs/ocudu/tests/unittests/fapi_adaptor/mac/p7/pdu_translators/dl_pdcch_pdu_test.cpp

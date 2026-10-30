@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_ofh_ecpri.a CMakeFiles/ocudu_ofh_ecpri.dir/ecpri_factories.cpp.o CMakeFiles/ocudu_ofh_ecpri.dir/ecpri_packet_builder_impl.cpp.o CMakeFiles/ocudu_ofh_ecpri.dir/ecpri_packet_decoder_impl.cpp.o
+/usr/bin/ranlib libocudu_ofh_ecpri.a

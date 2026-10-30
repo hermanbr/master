@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_f1u_app_helpers.a CMakeFiles/ocudu_f1u_app_helpers.dir/f1u_cli11_schema.cpp.o CMakeFiles/ocudu_f1u_app_helpers.dir/f1u_appconfig_validator.cpp.o CMakeFiles/ocudu_f1u_app_helpers.dir/f1u_config_yaml_writer.cpp.o
+/usr/bin/ranlib libocudu_f1u_app_helpers.a

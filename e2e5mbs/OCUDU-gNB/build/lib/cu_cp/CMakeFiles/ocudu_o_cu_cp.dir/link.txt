@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_o_cu_cp.a CMakeFiles/ocudu_o_cu_cp.dir/o_cu_cp_factory.cpp.o CMakeFiles/ocudu_o_cu_cp.dir/o_cu_cp_impl.cpp.o
+/usr/bin/ranlib libocudu_o_cu_cp.a

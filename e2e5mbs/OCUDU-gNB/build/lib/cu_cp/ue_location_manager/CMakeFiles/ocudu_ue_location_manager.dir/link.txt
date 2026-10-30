@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_ue_location_manager.a CMakeFiles/ocudu_ue_location_manager.dir/ue_location_manager.cpp.o
+/usr/bin/ranlib libocudu_ue_location_manager.a

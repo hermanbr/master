@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_o_du_high.a CMakeFiles/ocudu_o_du_high.dir/o_du_high_factory.cpp.o CMakeFiles/ocudu_o_du_high.dir/o_du_high_impl.cpp.o CMakeFiles/ocudu_o_du_high.dir/o_du_high_metrics_notifier_proxy.cpp.o
+/usr/bin/ranlib libocudu_o_du_high.a

@@ -1,0 +1,2 @@
+/usr/bin/ar qc libocudu_cu_up_unit_metrics_helpers.a CMakeFiles/ocudu_cu_up_unit_metrics_helpers.dir/cu_up_f1u_metrics_producer.cpp.o CMakeFiles/ocudu_cu_up_unit_metrics_helpers.dir/cu_up_f1u_metrics_consumers.cpp.o CMakeFiles/ocudu_cu_up_unit_metrics_helpers.dir/cu_up_pdcp_metrics_producer.cpp.o CMakeFiles/ocudu_cu_up_unit_metrics_helpers.dir/cu_up_pdcp_metrics_consumers.cpp.o
+/usr/bin/ranlib libocudu_cu_up_unit_metrics_helpers.a
